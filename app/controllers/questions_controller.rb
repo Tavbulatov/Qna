@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = current_user.questions.new
+    @question.build_reward
   end
 
   def update
@@ -43,7 +44,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [])
+    params.require(:question).permit(:title, :body, files: [], reward_attributes: [:name, :image])
   end
 
   def find_question
