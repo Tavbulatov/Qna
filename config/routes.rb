@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 
   resources :attachments, only: :destroy
+  resources :rewards, only: :show
 
   resources :questions do
     resources :answers, shallow: true, only: %i[create update destroy] do
