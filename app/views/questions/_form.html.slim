@@ -15,5 +15,16 @@
     = form.label :files
     br
     = form.file_field :files, multiple: true, direct_upload: true
+
   p
-    = form.submit class: 'save-question'
+    = form.fields_for :reward do |r|
+      p
+        = r.label :name, 'Reward name'
+        br
+        = r.text_field :name
+      p
+        = r.label :image
+        br
+        = r.file_field :image, direct_upload: true
+
+  p = form.submit class: 'save-question'
