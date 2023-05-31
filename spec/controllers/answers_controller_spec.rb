@@ -132,15 +132,14 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #best' do
+    let!(:reward) { create(:reward, question: question)}
     let!(:answers) { create_list(:answer, 3, question: question) }
-    let!(:best_answer) { create(:answer, question: question)}
 
     before { login(user) }
     before { patch :best, params: {id: answer}, format: :js }
 
     it 'all answers except the best answer' do
-      patch :best, params: {id: best_answer}, format: :js
-      expect(assigns(:answers)).to_not include(best_answer)
+      expect(assigns(:answers)).to_not include(answer)
     end
 
     it 'setting variable best_answer' do
@@ -158,6 +157,11 @@ RSpec.describe AnswersController, type: :controller do
 
     it 'set flash message' do
       expect(flash[:notice]).to eq('Best answer selected successfully')
+    end
+
+    it 'presentation of the award' do
+      question.reload
+      expect(question.best_answer.author.rewards.first).to eq(reward)
     end
   end
 end
