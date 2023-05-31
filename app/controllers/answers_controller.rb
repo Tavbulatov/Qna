@@ -29,7 +29,10 @@ class AnswersController < ApplicationController
   def best
     question = @answer.question
     question.update(best_answer: @answer)
+
     @best_answer = question.best_answer
+    @best_answer.author.rewards.push(question.reward) if question.reward
+
     @answers = question.answers.where.not(id: @best_answer.id)
 
     flash[:notice] = 'Best answer selected successfully'
