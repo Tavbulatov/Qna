@@ -16,4 +16,17 @@ RSpec.describe Answer, type: :model do
   let(:answer) { create(:answer, author: user) }
 
   it { expect(answer.user?(user)).to eq(true) }
+
+  let!(:links) {create_list(:link, 2, linkable: answer)}
+  let!(:link_gists) {create_list(:link, 2, :url_gist, linkable: answer)}
+
+  context 'gists' do
+    it { expect(answer.gists).to match_array(link_gists) }
+    it { expect(answer.gists).to_not match_array(links) }
+  end
+
+  context 'links_except_gists' do
+    it { expect(answer.links_except_gists).to match_array(links) }
+    it { expect(answer.links_except_gists).to_not match_array(link_gists) }
+  end
 end
