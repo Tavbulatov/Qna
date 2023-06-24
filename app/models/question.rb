@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
   include QuestionAnswer
+  include Linkable
 
   has_many :answers, dependent: :destroy
 
