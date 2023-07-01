@@ -8,8 +8,6 @@ module QuestionAnswer
       author == user
     end
 
-    def gists
-      links.select { |l| l.gist? }
     def gists_url
       gists.pluck('url')
     end
@@ -18,6 +16,10 @@ module QuestionAnswer
       gists.map(&:id)
     end
 
+    private
+
+    def gists
+      links.select { |l| l.gist? }
     end
   end
 end
