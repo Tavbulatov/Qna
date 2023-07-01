@@ -10,10 +10,14 @@ module QuestionAnswer
 
     def gists
       links.select { |l| l.gist? }
+    def gists_url
+      gists.pluck('url')
     end
 
-    def links_except_gists
-      links.where.not(id: gists)
+    def gists_id
+      gists.map(&:id)
+    end
+
     end
   end
 end
