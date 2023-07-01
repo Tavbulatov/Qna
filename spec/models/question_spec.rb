@@ -25,13 +25,11 @@ RSpec.describe Question, type: :model do
   let!(:links) {create_list(:link, 2, linkable: question)}
   let!(:link_gists) {create_list(:link, 2, :url_gist, linkable: question)}
 
-  context 'gists' do
-    it { expect(question.gists).to match_array(link_gists) }
-    it { expect(question.gists).to_not match_array(links) }
+  context 'gists_url' do
+    it { expect(question.gists_url).to match_array(link_gists.map(&:url)) }
   end
 
-  context 'links_except_gists' do
-    it { expect(question.links_except_gists).to match_array(links) }
-    it { expect(question.links_except_gists).to_not match_array(link_gists) }
+  context 'gists_id' do
+    it { expect(question.gists_id).to match_array(link_gists.map(&:id)) }
   end
 end
