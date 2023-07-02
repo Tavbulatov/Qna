@@ -1,8 +1,10 @@
 .question_show
   .flash_message
-
   h2 id="question-title" =  "Question title: #{@question.title}"
   p id="question-body"  = @question.body
+
+  -if @question.user?(current_user)
+  = link_to "Edit", '#', class: 'edit-question-link'
 
   -if @question.reward.present?
     p =link_to 'Reward', reward_path(@question.reward)
@@ -10,8 +12,6 @@
   .files
     = render 'shared/attachment', resource: @question
 
-  -if @question.user?(current_user)
-    = link_to "Edit", '#', class: 'edit-question-link'
   .links(data-gists_url=@question.gists_url
          data-gists_id=@question.gists_id)
 
