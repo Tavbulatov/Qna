@@ -10,6 +10,7 @@ import "channels"
 
 import 'channels/question'
 import 'channels/answer'
+import 'channels/gist'
 
 require("jquery")
 
