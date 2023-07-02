@@ -12,6 +12,9 @@
 
   -if @question.user?(current_user)
     = link_to "Edit", '#', class: 'edit-question-link'
+  .links(data-gists_url=@question.gists_url
+         data-gists_id=@question.gists_id)
+
     -if !@question.links.none?
       h2 = 'Links'
       = render 'shared/link', resource: @question.links
