@@ -12,6 +12,9 @@
 
   -if @question.user?(current_user)
     = link_to "Edit", '#', class: 'edit-question-link'
+    -if !@question.links.none?
+      h2 = 'Links'
+      = render 'shared/link', resource: @question.links
 
     .question_errors
     = render 'form'
