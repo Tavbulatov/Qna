@@ -25,6 +25,8 @@
       p
         = r.label :image
         br
+        br
         = r.file_field :image, direct_upload: true
 
+  p = link_to_add_association 'Add link', form, :links, partial: 'links/link_fields'
   p = form.submit class: 'save-question'
