@@ -92,6 +92,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    cocoon (1.2.15)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -322,6 +323,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (~> 2.7, >= 2.7.1)
+  cocoon
   devise (~> 4.9, >= 4.9.2)
   factory_bot_rails
   jbuilder (~> 2.7)

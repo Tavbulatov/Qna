@@ -13,6 +13,7 @@ import 'channels/answer'
 import 'channels/gist'
 
 require("jquery")
+require("@nathanvda/cocoon")
 
 Rails.start()
 Turbolinks.start()

@@ -33,6 +33,7 @@ gem 'slim-rails'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
+gem "cocoon"
 
 group :test do
   gem 'rails-controller-testing'
