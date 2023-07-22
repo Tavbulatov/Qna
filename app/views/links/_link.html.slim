@@ -1,10 +1,10 @@
--resource.each do |link|
-  .(link-id=link.id)
-    -if link.gist?
-      p link-name-id="#{link.id}" = link.name
-    -else
-      p = link_to link.name, link.url, target: '_blank'
-    p = link_to 'Delete link', link_path(link),
-                              method: :delete,
-                              remote: true,
-                              data: {confirm: 'Are you sure?'}
+
+.(link-id=link.id)
+  -if link.gist?
+    p link-name-id="#{link.id}" = link.name
+  -else
+    p = link_to link.name, link.url, target: '_blank'
+  p = link_to 'Delete link', link_path(link),
+                            method: :delete,
+                            remote: true,
+                            data: {confirm: 'Are you sure?'}

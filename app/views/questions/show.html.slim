@@ -17,7 +17,7 @@
 
     -if !@question.links.none?
       h2 = 'Links'
-      = render 'links/link', resource: @question.links
+      = render @question.links
 
     .question_errors
     = render 'form'
