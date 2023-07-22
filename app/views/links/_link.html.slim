@@ -1,6 +1,5 @@
 -resource.each do |link|
-  .(data-link-id=link.id)
+  .(link-id=link.id)
     -if link.gist?
-      p = link.name
     -else
       p = link_to link.name, link.url, target: '_blank'
