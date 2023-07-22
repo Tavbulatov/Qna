@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :link do
-    name { "MyString" }
+    name { "Google" }
     url { "https://google.com" }
     linkable { nil }
 
