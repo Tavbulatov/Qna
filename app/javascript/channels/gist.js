@@ -4,8 +4,8 @@ $(document).on('turbolinks:load', function(){
 
   $.each(gistsUrl, function(index, url) {
     $.getJSON(url + '.json?callback=?', function(response) {
-      let link = $('<link>').attr('rel', 'stylesheet').attr('href', response.stylesheet);
-      $('[data-link-id="' + gistsId[index] + '"]').append(link).append(response.div);
+      let link = $('<p>').append($('<link>').attr('rel', 'stylesheet').attr('href', response.stylesheet));
+      $('[link-name-id="' + gistsId[index] + '"]').append(link).append(response.div);
     });
   });
 });
