@@ -48,6 +48,17 @@ feature 'The user can edit the question', "
         expect(page).to have_link 'Edit'
       end
     end
+
+    scenario 'adding links' do
+      click_on 'Add link'
+
+      fill_in 'Name', with: 'Google'
+      fill_in 'Url', with: "https://google.com"
+
+      click_on 'Update Question'
+
+      expect(page).to have_link("Google")
+    end
   end
 
   scenario 'Non-author of the question does not see the edit button', js: true do
