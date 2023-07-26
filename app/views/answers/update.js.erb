@@ -9,3 +9,9 @@ $('.answer_error[answer-id="<%= @answer.id %>"]').html('<%= render 'shared/error
     $('.answer[answer-id="<%= @answer.id %>"]').replaceWith('<%= j render @answer %>');
   <% end %>
 <% end %>
+
+<% if @answer.gists.present? %>
+  <% @answer.gists.each do |l|%>
+    gistDownloadsAndPaste('<%= "#{l.url}" %>', '<%= "#{l.id}" %>');
+  <% end %>
+<% end %>

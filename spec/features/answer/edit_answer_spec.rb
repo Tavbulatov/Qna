@@ -47,6 +47,24 @@ feature 'The author wants to change the answer','
         expect(page).to_not have_selector 'textarea'
       end
     end
+
+    scenario 'adding links in edit form' do
+      within '.answers_all' do
+        click_on 'Add link'
+      end
+
+      fill_in 'Name', with: 'Gist'
+      fill_in 'Url', with: "https://gist.github.com/Tavbulatov/789ad83d7cf2f60d151b915f9b34a025"
+
+      click_on 'Update Answer'
+      sleep 2
+
+      within('.answers_all') do
+        expect(page).to have_content('Gist')
+        expect(page).to have_content('asd')
+        expect(page).to have_content('123')
+      end
+    end
   end
 
   scenario 'Not the author does not see the edit button' do

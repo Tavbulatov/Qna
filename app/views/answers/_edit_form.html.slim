@@ -7,5 +7,6 @@
     = form.label :files
     br
     = form.file_field :files, multiple: true
-  p
-    = form.submit class: 'save-answer', data: { answer_id: answer.id }
+  p = link_to_add_association 'Add link', form, :links, partial: 'links/link_fields'
+
+  p = form.submit class: 'save-answer', data: { answer_id: answer.id }
