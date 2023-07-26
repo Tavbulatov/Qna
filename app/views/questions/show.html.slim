@@ -16,8 +16,8 @@
   //Далее в gist.js при загрузке данной страницы ссылки с гистами загружаются
   .links(data-gists_url = @question.gists_url
          data-gists_id  = @question.gists_id
-         data-answer_gists_url = @answers.map{_1.gists_url}.flatten
-         data-answer_gists_id  = @answers.map{_1.gists_id}.flatten
+         data-answer_gists_url = @question.answers.map{_1.gists_url}.flatten
+         data-answer_gists_id  = @question.answers.map{_1.gists_id}.flatten
          )
 
     -if @question.links.present?
