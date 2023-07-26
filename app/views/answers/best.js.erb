@@ -4,3 +4,15 @@ $('.flash_message').html('<%= render 'shared/flash'%>');
   $('.best_answer').html('<%= j render  'answers/best_answer', best_answer: @best_answer%>')
   $('.answers').html('<%= j render  @answers%>')
 <% end%>
+
+<% if @best_answer.gists.present? %>
+  <% @best_answer.gists.each do |l|%>
+    gistDownloadsAndPaste('<%= "#{l.url}" %>', '<%= "#{l.id}" %>');
+  <% end %>
+<% end %>
+
+<% if @answers.map{_1.gists}.flatten.present? %>
+  <% @answers.map{_1.gists}.flatten.each do |l|%>
+    gistDownloadsAndPaste('<%= "#{l.url}" %>', '<%= "#{l.id}" %>');
+  <% end %>
+<% end %>

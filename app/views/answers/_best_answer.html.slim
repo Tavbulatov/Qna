@@ -2,6 +2,10 @@
   h3 Best answer:
   li = best_answer.body
   = render 'shared/attachment', resource: best_answer
+  -if best_answer.links.present?
+    h2 = 'Links'
+    = render best_answer.links
+
   -if best_answer.user?(current_user)
     = link_to "Delete", answer_path(best_answer),
                             method: :delete,
