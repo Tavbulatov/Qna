@@ -12,16 +12,23 @@
   .files
     = render 'shared/attachment', resource: @question
 
-  .links(data-gists_url=@question.gists_url
-         data-gists_id=@question.gists_id)
+  //Передаю урлы и айди ссылок вопроса и ответов вопроса
+  //Далее в gist.js при загрузке данной страницы ссылки с гистами загружаются
+  .links(data-gists_url = @question.gists_url
+         data-gists_id  = @question.gists_id
+         data-answer_gists_url = @answers.map{_1.gists_url}.flatten
+         data-answer_gists_id  = @answers.map{_1.gists_id}.flatten
+         )
 
-    -if !@question.links.none?
+    -if @question.links.present?
       h2 = 'Links'
       = render @question.links
 
     .question_errors
     = render 'form'
 br
+-if @question.answers.present?
+  h2 = 'Answers'
 .answers_all
   .best_answer
     -if @question.best_answer.present?

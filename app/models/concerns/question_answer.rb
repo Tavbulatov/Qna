@@ -16,8 +16,6 @@ module QuestionAnswer
       gists.map(&:id)
     end
 
-    private
-
     def gists
       links.select { |l| l.gist? }
     end

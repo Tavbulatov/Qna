@@ -3,3 +3,13 @@ $('.question_errors').html('<%= render 'shared/errors', resource: @question %>')
 $('#question-title').html('<%= j "Question title: #{@question.title}" %>');
 $('#question-body').html('<%= j @question.body %>');
 $('.files').replaceWith('<%= j render 'shared/attachment', resource: @question%>');
+
+<% if @question.links.present? %>
+   $('.links').replaceWith('<%= j render @question.links %>');
+
+  <% if @question.gists.present? %>
+    <% @question.gists.each do |l|%>
+      gistDownloadsAndPaste('<%= "#{l.url}" %>', '<%= "#{l.id}" %>');
+    <% end %>
+  <% end %>
+<% end %>

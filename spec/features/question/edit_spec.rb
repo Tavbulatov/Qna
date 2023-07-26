@@ -56,7 +56,7 @@ feature 'The user can edit the question', "
       fill_in 'Url', with: "https://google.com"
 
       click_on 'Update Question'
-
+      sleep 1
       expect(page).to have_link("Google")
     end
   end

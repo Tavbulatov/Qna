@@ -32,4 +32,8 @@ RSpec.describe Question, type: :model do
   context 'gists_id' do
     it { expect(question.gists_id).to match_array(link_gists.map(&:id)) }
   end
+
+  context 'gists' do
+    it { expect(question.gists).to match_array(link_gists) }
+  end
 end
