@@ -5,6 +5,9 @@
     li = answer.body
 
     = render 'shared/attachment', resource: answer
+    -if answer.links.present?
+      h2 = 'Links'
+      = render answer.links
 
     -if answer.user?(current_user)
       = link_to 'Best', best_answer_path(answer),method: :patch,remote: true

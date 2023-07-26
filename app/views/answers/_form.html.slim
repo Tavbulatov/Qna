@@ -7,5 +7,6 @@
     = form.label :files
     br
     = form.file_field :files, multiple: true, direct_upload: true
-  p
+
+    p = link_to_add_association 'Add link', form, :links, partial: 'links/link_fields'
     = form.submit
