@@ -50,7 +50,9 @@ feature 'The user can edit the question', "
     end
 
     scenario 'adding links' do
-      click_on 'Add link'
+      within '.form-question' do
+        click_on 'Add link'
+      end
 
       fill_in 'Name', with: 'Google'
       fill_in 'Url', with: "https://google.com"

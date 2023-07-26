@@ -12,7 +12,10 @@ I want to be able to remove the link I want
     sign_in(user)
     visit question_path(question)
 
-    click_on 'Delete link'
+    within '.links' do
+      click_on 'Delete link'
+    end
+
     accept_alert 'Are you sure?'
 
     within('.links') do
