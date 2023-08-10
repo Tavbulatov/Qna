@@ -1,6 +1,13 @@
 .(answer-id=best_answer.id)
   h3 Best answer:
   li = best_answer.body
+
+  -unless best_answer.user?(current_user)
+    = render 'votes/form', resource: best_answer
+
+  h4 = "Rating answer"
+  p id = "Answer-#{best_answer.id}"= best_answer.rating
+
   = render 'shared/attachment', resource: best_answer
   -if best_answer.links.present?
     h2 = 'Links'

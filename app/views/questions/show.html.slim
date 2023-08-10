@@ -3,6 +3,12 @@
   h2 id="question-title" =  "Question title: #{@question.title}"
   p id="question-body"  = @question.body
 
+  -unless @question.user?(current_user)
+    = render 'votes/form', resource: @question
+
+  h4 = "Rating question"
+  p id = "Question-#{@question.id}" = @question.rating
+
   -if @question.user?(current_user)
     = link_to "Edit", '#', class: 'edit-question-link'
 

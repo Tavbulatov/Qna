@@ -1,0 +1,29 @@
+.vote-message data = "#{resource_name_and_id(resource)}"
+-if user_signed_in?
+  -if resource.vote_author(current_user).present?
+    p = link_to 'Cancel vote', vote_path(resource.vote_author(current_user)),
+                                  method: :delete,
+                                  remote: true,
+                                  class: 'vote-button',
+                                  data: "#{resource.class.name}-#{resource.id}"
+
+  -else
+    = form_with model: [resource, Vote.new],
+               html: {data: {vote_form_id: resource_name_and_id(resource)}},
+               local: false,
+               class: "vote-form " do |form|
+      p
+        = form.button 'Up', name: 'vote[body]', value: 'up'
+        ||
+        = form.button 'Down', name: 'vote[body]', value: 'down'
+
+  // скрытую форма нужна: если есть голос и при удалении голоса
+  // можно было бы удалив hidden в js проявить форму
+  = form_with model: [resource, Vote.new],
+              html: {data: {vote_form_id: resource_name_and_id(resource)}},
+              local: false,
+              class: "vote-form hidden" do |form|
+    p
+      = form.button 'Up', name: 'vote[body]', value: 'up'
+      ||
+      = form.button 'Down', name: 'vote[body]', value: 'down'
