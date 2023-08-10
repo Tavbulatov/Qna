@@ -41,5 +41,8 @@ module Qna
                        request_specs: false,
                        controller_specs: true
     end
+
+    config.active_record.default_timezone = 'Moscow'
+    config.time_zone = 'Moscow'
   end
 end
