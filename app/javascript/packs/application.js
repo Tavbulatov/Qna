@@ -12,6 +12,7 @@ import 'channels/question'
 import 'channels/answer'
 import 'channels/gist'
 import 'channels/global'
+import 'channels/vote'
 
 require("jquery")
 require("@nathanvda/cocoon")
