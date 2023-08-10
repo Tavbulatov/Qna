@@ -24,6 +24,7 @@ RSpec.describe Question, type: :model do
 
   let!(:links) {create_list(:link, 2, linkable: question)}
   let!(:link_gists) {create_list(:link, 2, :url_gist, linkable: question)}
+  let!(:vote) {create(:vote, author: user, votable: question)}
 
   context 'gists_url' do
     it { expect(question.gists_url).to match_array(link_gists.map(&:url)) }
@@ -35,5 +36,17 @@ RSpec.describe Question, type: :model do
 
   context 'gists' do
     it { expect(question.gists).to match_array(link_gists) }
+  end
+
+  context 'gists' do
+    it { expect(question.gists).to match_array(link_gists) }
+  end
+
+  context 'vote_author' do
+    it { expect(question.vote_author(user)).to eq(vote) }
+  end
+
+  context 'rating' do
+    it { expect(question.rating).to eq(0) }
   end
 end
