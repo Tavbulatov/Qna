@@ -17,8 +17,8 @@ RSpec.describe Answer, type: :model do
 
   it { expect(answer.user?(user)).to eq(true) }
 
-  let!(:links) {create_list(:link, 2, linkable: answer)}
-  let!(:link_gists) {create_list(:link, 2, :url_gist, linkable: answer)}
+  let!(:links) { create_list(:link, 2, linkable: answer) }
+  let!(:link_gists) { create_list(:link, 2, :url_gist, linkable: answer) }
 
   context 'gists_url' do
     it { expect(answer.gists_url).to match_array(link_gists.map(&:url)) }

@@ -30,19 +30,19 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'slim-rails'
 
+gem 'aws-sdk-s3', require: false
+gem 'cocoon'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'jquery-rails'
-gem 'aws-sdk-s3', require: false
-gem "cocoon"
 
 group :test do
-  gem 'rails-controller-testing'
-  gem 'shoulda-matchers', '~> 5.0'
   gem 'capybara', '~> 2.7', '>= 2.7.1'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 5.0'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'webdrivers'
 end
 
 group :development, :test do

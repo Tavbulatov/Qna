@@ -5,7 +5,6 @@ feature 'The author can remove answer attachments', '
   I want to remove attachments
   to my answer
 ' do
-
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
   given!(:question) { create(:question, author: user) }
@@ -14,7 +13,7 @@ feature 'The author can remove answer attachments', '
   scenario 'Deleting attach by the author', js: true do
     sign_in(user)
     visit question_path(question)
-    click_on("Delete attach")
+    click_on('Delete attach')
     accept_alert 'Are you sure?'
     sleep 0.5
 
@@ -27,7 +26,7 @@ feature 'The author can remove answer attachments', '
     visit question_path(question)
 
     within '.answers' do
-      expect(page).to_not have_link("Delete attach")
+      expect(page).to_not have_link('Delete attach')
     end
   end
 end

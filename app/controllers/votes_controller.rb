@@ -17,7 +17,7 @@ class VotesController < ApplicationController
 
   def render_json(model, options = {})
     respond_to do |format|
-      format.json { render json: [model.rating, flash[:notice], options[:vote_id] ] }
+      format.json { render json: [model.rating, flash[:notice], options[:vote_id]] }
     end
   end
 

@@ -10,12 +10,12 @@ RSpec.describe LinksController, type: :controller do
 
     context 'destruction by the author of the link' do
       it 'destroy link' do
-        expect { delete :destroy, params: { id: link}, format: :js }.to change(Link, :count).by(-1)
+        expect { delete :destroy, params: { id: link }, format: :js }.to change(Link, :count).by(-1)
       end
     end
 
     context 'removal of link by link author' do
-      before { delete :destroy, params: { id: link}, format: :js }
+      before { delete :destroy, params: { id: link }, format: :js }
 
       it 'render destroy view' do
         expect(response).to render_template :destroy
@@ -32,10 +32,10 @@ RSpec.describe LinksController, type: :controller do
       before { login(other_user) }
 
       it 'destroy link' do
-        expect {delete :destroy, params: { id: link}, format: :js}.to change(Link, :count).by(0)
+        expect { delete :destroy, params: { id: link }, format: :js }.to change(Link, :count).by(0)
       end
 
-      before { delete :destroy, params: { id: link}, format: :js }
+      before { delete :destroy, params: { id: link }, format: :js }
 
       it 'render destroy view' do
         expect(response).to render_template :destroy

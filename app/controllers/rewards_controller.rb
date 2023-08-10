@@ -1,5 +1,4 @@
 class RewardsController < ApplicationController
-
   def index
     @user_rewards = current_user.rewards
   end

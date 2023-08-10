@@ -3,10 +3,10 @@ class Link < ApplicationRecord
 
   validates :name, presence: true
   validates :url, presence: true,
-            format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
-            message: "Invalid URL format" }
+                  format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                            message: 'Invalid URL format' }
 
   def gist?
-    self.url.include?('gist.github')
+    url.include?('gist.github')
   end
 end

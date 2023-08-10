@@ -4,8 +4,7 @@ feature 'When creating a question, I want to attach links
 I can add links dynamically on button click
 If I attached a link not to the point, then I see a link with the name of the link
 ' do
-
-  scenario 'create link', js: true  do
+  scenario 'create link', js: true do
     sign_in(create(:user))
     click_on 'Ask question'
     sleep 0.5
@@ -15,7 +14,7 @@ If I attached a link not to the point, then I see a link with the name of the li
     click_on 'Add link'
 
     fill_in 'Name', with: 'Google'
-    fill_in 'Url', with: "https://google.com"
+    fill_in 'Url', with: 'https://google.com'
 
     click_on 'Create Question'
     sleep 0.5

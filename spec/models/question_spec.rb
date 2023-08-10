@@ -9,7 +9,7 @@ RSpec.describe Question, type: :model do
   it { should have_many_attached(:files) }
 
   it { should belong_to(:author).class_name('User') }
-  it { should belong_to(:best_answer).class_name('Answer').optional(true)  }
+  it { should belong_to(:best_answer).class_name('Answer').optional(true) }
 
   it { should accept_nested_attributes_for(:reward).allow_destroy(true) }
   it { should accept_nested_attributes_for(:links).allow_destroy(true) }
@@ -22,9 +22,9 @@ RSpec.describe Question, type: :model do
 
   it { expect(question.user?(user)).to eq(true) }
 
-  let!(:links) {create_list(:link, 2, linkable: question)}
-  let!(:link_gists) {create_list(:link, 2, :url_gist, linkable: question)}
-  let!(:vote) {create(:vote, author: user, votable: question)}
+  let!(:links) { create_list(:link, 2, linkable: question) }
+  let!(:link_gists) { create_list(:link, 2, :url_gist, linkable: question) }
+  let!(:vote) { create(:vote, author: user, votable: question) }
 
   context 'gists_url' do
     it { expect(question.gists_url).to match_array(link_gists.map(&:url)) }

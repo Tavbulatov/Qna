@@ -13,7 +13,7 @@ feature 'The user can edit the question', "
     background do
       sign_in(user)
       visit question_path(question)
-      click_on "Edit"
+      click_on 'Edit'
     end
 
     scenario 'edit question' do
@@ -32,7 +32,7 @@ feature 'The user can edit the question', "
       within '.question_show' do
         fill_in 'Title', with: nil
         fill_in 'Body', with: nil
-        click_on "Update Question"
+        click_on 'Update Question'
         sleep 0.5
         expect(page).to have_content "Title can't be blank"
         expect(page).to have_content "Body can't be blank"
@@ -55,11 +55,11 @@ feature 'The user can edit the question', "
       end
 
       fill_in 'Name', with: 'Google'
-      fill_in 'Url', with: "https://google.com"
+      fill_in 'Url', with: 'https://google.com'
 
       click_on 'Update Question'
       sleep 1
-      expect(page).to have_link("Google")
+      expect(page).to have_link('Google')
     end
   end
 
@@ -67,6 +67,6 @@ feature 'The user can edit the question', "
     sign_in(other_user)
     visit question_path(question)
 
-    expect(page).to_not have_link("Edit")
+    expect(page).to_not have_link('Edit')
   end
 end

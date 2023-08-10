@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :vote do
-    body { "Up" }
+    body { 'Up' }
     author { nil }
     votable { nil }
 
     trait :down do
-      body { "Down" }
+      body { 'Down' }
     end
   end
 end

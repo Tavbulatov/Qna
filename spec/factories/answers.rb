@@ -10,7 +10,8 @@ FactoryBot.define do
 
     trait :with_file do
       after(:build) do |answer|
-        answer.files.attach(io: File.open(Rails.root.join('spec', 'rails_helper.rb')), filename: 'rails_helper.rb', content_type: 'application/ruby')
+        answer.files.attach(io: File.open(Rails.root.join('spec', 'rails_helper.rb')), filename: 'rails_helper.rb',
+                            content_type: 'application/ruby')
       end
     end
 

@@ -37,7 +37,7 @@ I can vote up or down.
       expect(page).to have_button('Up')
     end
 
-    scenario "if the user votes and unvotes, the up and down buttons appear" do
+    scenario 'if the user votes and unvotes, the up and down buttons appear' do
       click_on 'Down'
       sleep 1
       click_on 'Cancel vote'
@@ -47,7 +47,7 @@ I can vote up or down.
     end
   end
 
-  scenario 'the author of the question cannot upvote his own question',js: true do
+  scenario 'the author of the question cannot upvote his own question', js: true do
     sign_in(author)
     visit question_path(question)
 
@@ -55,7 +55,7 @@ I can vote up or down.
     expect(page).to_not have_button('Up')
   end
 
-  scenario 'unauthenticated user does not see voting buttons',js: true  do
+  scenario 'unauthenticated user does not see voting buttons', js: true do
     visit question_path(question)
 
     expect(page).to_not have_button('Down')

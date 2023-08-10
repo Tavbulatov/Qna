@@ -24,7 +24,7 @@ feature 'The author can delete his answer', '
     scenario 'attempt to delete answer by another user' do
       sign_in(other_user)
       visit question_path(question)
-      expect(page).to_not have_link("Delete")
+      expect(page).to_not have_link('Delete')
     end
   end
 end

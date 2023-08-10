@@ -5,7 +5,6 @@ feature 'User creates a reward for the best answer', '
   I, as the author of the question, want to reward the user
   for the best answer to my question
 ' do
-
   scenario 'create reward' do
     sign_in(create(:user))
     click_on 'Ask question'
@@ -19,7 +18,7 @@ feature 'User creates a reward for the best answer', '
     click_on 'Test question'
     click_on 'Reward'
 
-    expect(page).to have_content("your award for the best answer")
+    expect(page).to have_content('your award for the best answer')
     expect(page).to have_css("img[src*='test_image.png']")
   end
 end

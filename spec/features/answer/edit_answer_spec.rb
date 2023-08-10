@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'The author wants to change the answer','
+feature 'The author wants to change the answer', '
   I am author the answerer
   I want to be able to change my answer
 ' do
@@ -54,7 +54,7 @@ feature 'The author wants to change the answer','
       end
 
       fill_in 'Name', with: 'Gist'
-      fill_in 'Url', with: "https://gist.github.com/Tavbulatov/789ad83d7cf2f60d151b915f9b34a025"
+      fill_in 'Url', with: 'https://gist.github.com/Tavbulatov/789ad83d7cf2f60d151b915f9b34a025'
 
       click_on 'Update Answer'
       sleep 2

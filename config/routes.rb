@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :questions, concerns: [:votable], defaults: { votable: 'Question' } do
     resources :answers, shallow: true, only: %i[create update destroy],
-                                       concerns: [:votable], defaults: { votable: 'Answer' } do
+                        concerns: [:votable], defaults: { votable: 'Answer' } do
       patch 'best', on: :member
     end
   end

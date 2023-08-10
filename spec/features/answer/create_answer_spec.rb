@@ -8,11 +8,11 @@ feature 'User can create answer', '
   given(:user) { create(:user) }
   given!(:question) { create(:question) }
 
-  describe 'Authenticated user', js: true  do
-    background {sign_in(user)}
-    background { visit question_path(question)}
+  describe 'Authenticated user', js: true do
+    background { sign_in(user) }
+    background { visit question_path(question) }
 
-    scenario 'creating an answer on the question page'do
+    scenario 'creating an answer on the question page' do
       fill_in 'Body', with: 'answer to question'
       click_on('Create Answer')
 
@@ -36,7 +36,7 @@ feature 'User can create answer', '
       click_on 'Add link'
 
       fill_in 'Name', with: 'Google'
-      fill_in 'Url', with: "https://google.com"
+      fill_in 'Url', with: 'https://google.com'
 
       click_on 'Create Answer'
       sleep 1
@@ -52,7 +52,7 @@ feature 'User can create answer', '
       click_on 'Add link'
 
       fill_in 'Name', with: 'Gist'
-      fill_in 'Url', with: "https://gist.github.com/Tavbulatov/789ad83d7cf2f60d151b915f9b34a025"
+      fill_in 'Url', with: 'https://gist.github.com/Tavbulatov/789ad83d7cf2f60d151b915f9b34a025'
 
       click_on 'Create Answer'
       sleep 1
