@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'As the creator of the question and links to it
+feature 'As the creator of the answer and links to it
 I want to be able to remove the link I want
 ' do
 
