@@ -17,7 +17,7 @@ I want to be able to remove the link I want
     end
 
     accept_alert 'Are you sure?'
-
+    sleep 1
     within '.answers_all' do
       expect(page).to_not have_link('Google')
     end
