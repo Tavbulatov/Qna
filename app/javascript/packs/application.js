@@ -6,17 +6,25 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
+import Handlebars from 'handlebars';
+// const templates = require.context('../templates', true, /\.hbs$/);
+// templates.keys().forEach(templates);
+
 import "channels"
 
-import 'channels/question'
-import 'channels/answer'
-import 'channels/gist'
-import 'channels/global'
-import 'channels/vote'
-
+import 'question'
+import 'answer'
+import 'gist'
+import 'global'
+import 'vote'
+import "channels/tests"
 require("jquery")
 require("@nathanvda/cocoon")
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+// questionTemplate = require('../templates/question.hbs')
+// let tem = Handlebars.compile(questionTemplate)
+
+// console.log(questionTemplate)

@@ -9,3 +9,17 @@ environment.plugins.prepend('Provide',
 )
 
 module.exports = environment
+module.exports = {
+  // ...другие настройки Webpack...
+
+  module: {
+    rules: [
+      // ...другие правила...
+
+      {
+        test: /\.hbs$/,
+        use: 'handlebars-loader'
+      }
+    ]
+  }
+}
