@@ -34,6 +34,7 @@ gem 'aws-sdk-s3', require: false
 gem 'cocoon'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'jquery-rails'
+gem 'gon'
 
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
