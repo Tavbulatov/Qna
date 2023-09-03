@@ -1,9 +1,9 @@
 class AnswersChannel < ApplicationCable::Channel
-  def follow
+  def subscribed
     stream_from "question_#{params[:question_id]}"
   end
 
-  def unfollow
+  def unsubscribed
     stop_all_streams
   end
 end
