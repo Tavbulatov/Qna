@@ -10,6 +10,7 @@
     "@rails/webpacker": "5.4.4",
     "actioncable": "^5.2.8-1",
     "handlebars": "^4.7.8",
+    "handlebars-helpers": "^0.10.0",
     "jquery": "^3.7.0",
     "jst": "^0.0.13",
     "turbolinks": "^5.2.0",

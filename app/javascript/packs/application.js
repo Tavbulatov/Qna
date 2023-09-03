@@ -12,6 +12,8 @@ import Handlebars from 'handlebars';
 
 import "channels"
 
+import '../helpers/handlebars'
+
 import 'question'
 import 'answer'
 import 'gist'
@@ -24,7 +26,3 @@ require("@nathanvda/cocoon")
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-// questionTemplate = require('../templates/question.hbs')
-// let tem = Handlebars.compile(questionTemplate)
-
-// console.log(questionTemplate)
