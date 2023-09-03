@@ -3,7 +3,7 @@
 // document.addEventListener('turbolinks:load', function(){
 //   let questions = document.querySelector('.questions');
 //   if(questions) {
-//     consumer.subscriptions.create("QuestionChannel", {
+//     consumer.subscriptions.create("QuestionsChannel", {
 //       connected: function() {
 //         this.perform('follow');
 //       },
