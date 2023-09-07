@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   def show
     gon.question_id = @question.id
     @answers = @question.answers.where.not(id: @question.best_answer)
-    ActionCable.server.broadcast("question_#{ @question.id}","question_number -#{ @question.id}"
+    ActionCable.server.broadcast("question_#{ @question.id}", message: "question_number -#{ @question.id}"
     )
   end
 
@@ -57,11 +57,12 @@ class QuestionsController < ApplicationController
   end
 
   def publish_question
-    # return if @question.errors.present?
+    return if @question.errors.present?
 
-    #   ActionCable.server.broadcast('questions',ApplicationController.render(partial: 'questions/question_channel',
-    #     locals: { question: @question }
-    #   )
-    #   )
+      ActionCable.server.broadcast('questions',
+        ApplicationController.render(partial: 'questions/question_channel',
+        locals: { question: @question }
+      )
+      )
   end
 end

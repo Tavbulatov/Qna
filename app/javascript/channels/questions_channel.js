@@ -1,18 +1,14 @@
-// import consumer from "./consumer"
+import consumer from "./consumer"
 
-// document.addEventListener('turbolinks:load', function(){
-//   let questions = document.querySelector('.questions');
-//   if(questions) {
-//     consumer.subscriptions.create("QuestionsChannel", {
-//       connected: function() {
-//         this.perform('follow');
-//       },
+document.addEventListener('turbolinks:load', function(){
+  // let questions = document.querySelector('.questions');
 
-//       received: function(data) {
-//         // let tem = (JST["./templates/question"](data))
-//         // console.log(tem)
-//         // questions.append(JST[".//templates/question"](data))
-//       }
-//     });
-//   }
-// })
+  consumer.subscriptions.create("QuestionsChannel", {
+    connected: function() {
+    },
+
+    received: function(data) {
+      console.log(data)
+    }
+  });
+})
