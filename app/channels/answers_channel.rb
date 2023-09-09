@@ -5,10 +5,4 @@ class AnswersChannel < ApplicationCable::Channel
 
   def unsubscribed
   end
-
-  def connected
-  end
-
-  def received
-  end
 end
