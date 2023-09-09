@@ -19,7 +19,7 @@ import 'answer'
 import 'gist'
 import 'global'
 import 'vote'
-import "channels/tests"
+
 require("jquery")
 require("@nathanvda/cocoon")
 

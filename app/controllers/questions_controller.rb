@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show ]
 
   before_action :find_question, only: %i[show destroy update]
+  before_action :set_gon_user_id, only: %i[index create show]
+
   after_action :publish_question, only: :create
 
   def index
@@ -11,8 +13,6 @@ class QuestionsController < ApplicationController
   def show
     gon.question_id = @question.id
     @answers = @question.answers.where.not(id: @question.best_answer)
-    ActionCable.server.broadcast("question_#{ @question.id}", message: "question_number -#{ @question.id}"
-    )
   end
 
   def new
@@ -56,13 +56,16 @@ class QuestionsController < ApplicationController
     @question = Question.with_attached_files.find(params[:id])
   end
 
+  def set_gon_user_id
+    gon.current_user_id = current_user&.id
+  end
+
   def publish_question
     return if @question.errors.present?
 
-      ActionCable.server.broadcast('questions',
-        ApplicationController.render(partial: 'questions/question_channel',
-        locals: { question: @question }
-      )
-      )
+    ActionCable.server.broadcast('questions',
+      ApplicationController.render(partial: 'questions/question_channel',
+      locals: { question: @question })
+    )
   end
 end

@@ -1,14 +1,20 @@
 import consumer from "./consumer"
+import template from '../templates/question.hbs';
 
-document.addEventListener('turbolinks:load', function(){
-  // let questions = document.querySelector('.questions');
+let questionsChannel
 
-  consumer.subscriptions.create("QuestionsChannel", {
-    connected: function() {
-    },
+function createQuestionChannel() {
+  if(!questionsChannel) {
+    questionsChannel = consumer.subscriptions.create("QuestionsChannel", {
+      connected: function() {
+      },
 
-    received: function(data) {
-      console.log(data)
-    }
-  });
-})
+      received: function(data) {
+        let questions = document.querySelector('.questions')
+        questions && document.querySelector('.questions').insertAdjacentHTML('beforeend', template(JSON.parse(data)))
+      }
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', createQuestionChannel)
