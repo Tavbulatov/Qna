@@ -2,6 +2,8 @@ class AnswersController < ApplicationController
   before_action :find_answer, only: %i[destroy update best]
   before_action :authenticate_user!
 
+  after_action :publish_answer, only: :create
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params.merge(author: current_user ))
@@ -46,5 +48,14 @@ class AnswersController < ApplicationController
 
   def find_answer
     @answer = Answer.with_attached_files.find(params[:id])
+  end
+
+  def publish_answer
+    return if @answer.errors.present?
+
+    ActionCable.server.broadcast("question_#{@question.id}",
+      ApplicationController.render(partial: 'answers/answer_channel',
+      locals: { answer: @answer, authenticity_token: form_authenticity_token })
+    )
   end
 end

@@ -1,5 +1,5 @@
 import consumer from "./consumer"
-import template from '../templates/question.hbs';
+import template from '../templates/questions.hbs';
 
 let questionsChannel
 
