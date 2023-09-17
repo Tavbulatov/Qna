@@ -12,9 +12,9 @@ $(document).on('turbolinks:load', function(){
     event.preventDefault();
     $(this).hide();
     $('.form-question').show();
-  });
+  })
 
-  $('.question_show').on('click', '.save-question', function() {
+  .on('click', '.save-question', function() {
     $('.form-question').hide();
     $('.edit-question-link').show();
   });

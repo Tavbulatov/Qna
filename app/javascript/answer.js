@@ -5,4 +5,10 @@ $(document).on('turbolinks:load', function(){
     let answerId = $(this).data('answerId');
     $('form#edit-answer-' + answerId).removeClass('hidden');
   })
+
+  .on('click', '.save-answer', function() {
+    let answerId = $(this).data('answerId');
+    $('form#edit-answer-' + answerId).addClass('hidden')
+    $(this).show();
+  });
 });

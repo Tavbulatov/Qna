@@ -4,8 +4,9 @@
     p link-name-id="#{link.id}" = link.name
   -else
     p = link_to link.name, link.url, target: '_blank'
--if link.linkable.user?(current_user)
-  p = link_to 'Delete link', link_path(link),
+
+  -if link.linkable.user?(current_user)
+    p = link_to 'Delete link', link_path(link),
                             method: :delete,
                             remote: true,
                             data: {confirm: 'Are you sure?'}

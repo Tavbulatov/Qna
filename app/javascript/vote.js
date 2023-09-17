@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function() {
+window.votes = function votes() {
   //загружаем все формы на странице
   let forms = document.querySelectorAll('.vote-form');
 
@@ -42,46 +42,37 @@ document.addEventListener('turbolinks:load', function() {
 
   // проходим по всем формам берем все кнопки каждой формы
   forms.forEach(function(form) {
+    form.addEventListener('ajax:success', function(e){
+      let formEvent = e.target
+      let formEventData = formEvent.dataset.voteFormId
+      // скрываем форму
+      formEvent.classList.add('hidden')
 
-    let buttonsForm = form.querySelectorAll('button');
+      //cоздаем новую кнопку на замену формы
+      let newCancelButton = document.createElement('a');
+      newCancelButton.classList.add('vote-button');
+      newCancelButton.setAttribute('data', formEventData);
+      newCancelButton.setAttribute('data-remote', 'true');
+      newCancelButton.setAttribute('rel', 'nofollow');
+      newCancelButton.setAttribute('data-method', 'delete');
+      newCancelButton.textContent = 'Cancel vote';
 
-    //cоздаем новую кнопку на замену формы
-    let newCancelButton = document.createElement('a');
-    newCancelButton.classList.add('vote-button');
-    newCancelButton.setAttribute('data', form.dataset.voteFormId);
-    newCancelButton.setAttribute('data-remote', 'true');
-    newCancelButton.setAttribute('rel', 'nofollow');
-    newCancelButton.setAttribute('data-method', 'delete');
-    newCancelButton.textContent = 'Cancel vote';
+      // берем из json обновленный рейтинг и втставляем
+      document.querySelector(`p[id=${formEventData}]`).textContent = e.detail[0][0]
 
-    // проходим по всем кнопкам в поиске родителя(формы) кнопки которую кликнули
-    buttonsForm.forEach(function(button) {
-      // вешаем на каждую кнопку формы обработчик
-      button.addEventListener('click', function(e) {
+      // добавляю сообщение
+      addMessage(formEventData, e.detail[0][1])
 
-        // в переменную загружаем форму кнопки на которую кликнули
-        let form = e.target.closest('.vote-form');
+      // определяем правильный путь для кнопки на созданный голос, берем из json айди голоса
+      newCancelButton.setAttribute('href', `/votes/${e.detail[0][2]}`);
 
-        // скрываем форму
-        form.classList.add('hidden')
+      // добавляю новую кнопку после формы которую скрыли выше
+      formEvent.insertAdjacentElement('afterend', newCancelButton);
 
-        form.addEventListener('ajax:success', function(e){
-          // берем из json обновленный рейтинг и втставляем
-          document.querySelector(`p[id=${form.dataset.voteFormId}]`).textContent = e.detail[0][0]
-
-          // добавляю сообщение
-          addMessage(form.dataset.voteFormId, e.detail[0][1])
-
-          // определяем правильный путь для кнопки на созданный голос, берем из json айди голоса
-          newCancelButton.setAttribute('href', `/votes/${e.detail[0][2]}`);
-
-          // добавляю новую кнопку после формы которую скрыли выше
-          form.insertAdjacentElement('afterend', newCancelButton);
-
-          // повторно вызываю метод чтобы повесить обработчик на новую кнопку
-          AddingHandlerToEachButton(document.querySelectorAll('a.vote-button'))
-        });
-      });
+      // повторно вызываю метод чтобы повесить обработчик на новую кнопку
+      AddingHandlerToEachButton(document.querySelectorAll('a.vote-button'))
     });
   });
-});
+}
+// document.addEventListener('turbolinks:load', function() {})
+document.addEventListener('turbolinks:load', votes)
