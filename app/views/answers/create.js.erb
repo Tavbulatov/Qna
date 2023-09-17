@@ -2,14 +2,7 @@ $('.flash_message').html('<%= render 'shared/flash'%>');
 $('.answer_errors').html('<%= render 'shared/errors', resource: @answer%>')
 
 <% if @answer.persisted?%>
-  $('.answers').append('<%= j render @answer%>')
   $('form.new-answer #answer_body').val('')
   $('form.new-answer #answer_files').val('')
   $('.link_fields').remove()
 <% end%>
-
-<% if @answer.gists.present? %>
-  <% @answer.gists.each do |l|%>
-    gistDownloadsAndPaste('<%= "#{l.url}" %>', '<%= "#{l.id}" %>');
-  <% end %>
-<% end %>
