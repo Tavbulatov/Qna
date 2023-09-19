@@ -12,9 +12,9 @@ window.commentable = function commentable(){
 
       let jsonData = e.detail[0][0]
 
-      if(jsonData.body) {
+      if(jsonData.comment) {
         let typeResource = jsonData.commentable_type == 'Answer'? 'answer': 'question'
-
+        console.log(jsonData)
         document.querySelector(`.comments[data-${typeResource}-id="${jsonData.commentable_id}"]`).insertAdjacentHTML('beforeend', template(jsonData))
         document.dispatchEvent(event)
       }
