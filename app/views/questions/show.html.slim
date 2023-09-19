@@ -31,7 +31,8 @@
       = render @question.links
 
     .question_errors
-    = render 'form'
+    .edit_question
+      = render 'form'
   .comments data-question-id=@question.id
     h2 = 'Comments'
     =render @question.comments
