@@ -32,6 +32,11 @@
 
     .question_errors
     = render 'form'
+  .comments data-question-id=@question.id
+    h2 = 'Comments'
+    =render @question.comments
+  =render 'comments/form', resource: @question
+hr
 br
 -if @question.answers.present?
   h2 = 'Answers'

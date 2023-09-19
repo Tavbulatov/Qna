@@ -19,6 +19,7 @@ import 'answer'
 import 'gist'
 import 'global'
 import 'vote'
+import 'comment'
 
 require("jquery")
 require("@nathanvda/cocoon")

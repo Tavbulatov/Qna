@@ -1,0 +1,7 @@
+= form_with model: [resource, Comment.new], local: false, class: 'new-comment' do |form|
+  p
+    = form.label :comment
+    br
+    = form.text_area :body, size: "70x5"
+    br
+    = form.submit

@@ -1,0 +1,4 @@
+.comment id = comment.id
+  p = comment.body
+  -if comment.author == current_user
+    p = link_to 'Delete comment', comment_path(comment), class: 'delete-comment', method: :delete, remote: true
