@@ -13,10 +13,11 @@ function createAndUpdateAnswersChannel() {
                       },
                       received(data) {
                         let jsonData = JSON.parse(data)
-
-                        document.querySelector('.answers_all').insertAdjacentHTML('beforeend', template(jsonData))
-
+                        if(gon.current_user_id != jsonData.author_id ){
+                          document.querySelector('.answers_all').insertAdjacentHTML('beforeend', template(jsonData))
+                        }
                         votes()
+                        commentable()
 
                         jsonData.links.forEach(function(link){
                           if(link['url'].includes('gist')){
