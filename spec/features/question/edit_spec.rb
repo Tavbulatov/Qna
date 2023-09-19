@@ -42,9 +42,12 @@ feature 'The user can edit the question', "
     scenario 'form hiding' do
       within '.question_show' do
         click_on 'Update Question'
-        expect(page).to_not have_selector 'textfield'
-        expect(page).to_not have_selector 'textarea'
-        expect(page).to_not have_link 'Update Question'
+        sleep 1
+        within('.edit_question') do
+          expect(page).to_not have_selector 'textfield'
+          expect(page).to_not have_selector 'textarea'
+          expect(page).to_not have_link 'Update Question'
+        end
         expect(page).to have_link 'Edit'
       end
     end

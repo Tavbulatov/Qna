@@ -44,7 +44,9 @@ feature 'The author wants to change the answer', '
         sleep 0.5
 
         expect(page).to have_link 'Edit answer'
-        expect(page).to_not have_selector 'textarea'
+        within(('.edit_answer')) do
+          expect(page).to_not have_selector 'textarea'
+        end
       end
     end
 

@@ -48,4 +48,22 @@ feature 'User can create question', "
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
+
+  describe 'multiple session', js: true do
+    scenario 'when you create a question, it appears on another user’s page' do
+      Capybara.using_session('user') do
+        sign_in(user)
+        click_on 'Ask question'
+        sleep 0.5
+        fill_in 'Title', with: 'Test question'
+        fill_in 'Body', with: 'text text text'
+        click_on 'Create Question'
+      end
+
+      Capybara.using_session('guest') do
+        visit questions_path
+        expect(page).to have_content 'Test question'
+      end
+    end
+  end
 end

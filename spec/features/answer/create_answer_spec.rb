@@ -64,4 +64,18 @@ feature 'User can create answer', '
       end
     end
   end
+
+  scenario 'when you create a answer, it appears on another user’s page', js: true do
+    Capybara.using_session('user') do
+      sign_in(user)
+      visit question_path(question)
+      fill_in 'Body', with: 'answer to question'
+      click_on 'Create Answer'
+    end
+
+    Capybara.using_session('guest') do
+      visit question_path(question)
+      expect(page).to have_content('answer to question')
+    end
+  end
 end
