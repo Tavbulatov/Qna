@@ -35,6 +35,10 @@ gem 'cocoon'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'jquery-rails'
 gem 'gon'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-vkontakte'
+gem "omniauth-rails_csrf_protection"
 
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
@@ -44,6 +48,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'webdrivers'
+  gem 'capybara-email'
 end
 
 group :development, :test do
@@ -62,6 +67,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

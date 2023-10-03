@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: 'oauth_callbacks'}
+
   root to: 'questions#index'
 
   concern :votable do
@@ -21,6 +22,12 @@ Rails.application.routes.draw do
                         defaults: { votable: 'Answer', commentable: 'Answer' } do
       patch 'best', on: :member
     end
+
+  end
+
+
+  resources :authorizations, only: %i[new create] do
+    get 'confirmation/:confirmation_token', action: 'confirmation', as: :confirmation
   end
 
   mount ActionCable.server => '/cable'

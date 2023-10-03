@@ -1,0 +1,10 @@
+= form_with url: authorizations_path, local: true do |form|
+  p
+    = form.label :email
+    br
+    = form.email_field :email
+
+    = form.hidden_field :uid, value: params[:uid]
+    = form.hidden_field :provider, value: params[:provider]
+
+  =form.submit 'Send'
