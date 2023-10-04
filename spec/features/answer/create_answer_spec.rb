@@ -25,7 +25,7 @@ feature 'User can create answer', '
       fill_in 'Body', with: 'answer to question'
       attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
       click_on('Create Answer')
-      sleep 1
+      sleep 3
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'spec_helper.rb'
     end
@@ -39,7 +39,7 @@ feature 'User can create answer', '
       fill_in 'Url', with: 'https://google.com'
 
       click_on 'Create Answer'
-      sleep 1
+      sleep 3
 
       within('.answers') do
         expect(page).to have_link('Google')
@@ -55,8 +55,7 @@ feature 'User can create answer', '
       fill_in 'Url', with: 'https://gist.github.com/Tavbulatov/789ad83d7cf2f60d151b915f9b34a025'
 
       click_on 'Create Answer'
-      sleep 1
-
+      sleep 2
       within('.answers') do
         expect(page).to have_content('Gist')
         expect(page).to have_content('asd')

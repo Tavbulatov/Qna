@@ -62,6 +62,7 @@ feature 'User can create question', "
 
       Capybara.using_session('guest') do
         visit questions_path
+        sleep 1
         expect(page).to have_content 'Test question'
       end
     end
