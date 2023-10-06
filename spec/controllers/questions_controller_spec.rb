@@ -193,7 +193,7 @@ RSpec.describe QuestionsController, type: :controller do
       before { login(other_user) }
       before { delete :destroy, params: { id: question } }
 
-      it 'redirect to questions page' do
+      it 'redirect to root_path' do
         expect(response).to redirect_to root_path
       end
     end

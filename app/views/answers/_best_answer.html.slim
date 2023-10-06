@@ -13,12 +13,13 @@
     h2 = 'Links'
     = render best_answer.links
 
-  -if best_answer.user?(current_user)
+  -if can? :destroy, best_answer
     = link_to "Delete", answer_path(best_answer),
                             method: :delete,
                             remote: true,
                             data: {confirm: 'Are you sure'}
     || |
+  -if can? :update, best_answer
     = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: best_answer.id }
 
     = render 'answers/edit_form', answer: best_answer

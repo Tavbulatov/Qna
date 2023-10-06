@@ -21,14 +21,16 @@
        =render answer.comments
     =render 'comments/form', resource: answer
     hr
-    -if answer.user?(current_user)
+    -if can? :best, answer
       = link_to 'Best', best_answer_path(answer), method: :patch,remote: true
       || |
+    -if can? :destroy, answer
       = link_to "Delete", answer_path(answer),
                               method: :delete,
                               remote: true,
                               data: {confirm: 'Are you sure?'}
       || |
+    -if can? :update, answer
       = link_to 'Edit answer', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
 
       .edit_answer

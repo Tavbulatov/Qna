@@ -121,12 +121,8 @@ RSpec.describe AnswersController, type: :controller do
 
       before { delete :destroy, params: { question_id: question, id: answer }, format: :js }
 
-      it 'render view destroy' do
-        expect(response).to render_template :destroy
-      end
-
-      it 'sets a flash message' do
-        expect(flash[:alert]).to eq("You cannot delete someone else's answer")
+      it 'render view root_path' do
+        expect(response).to redirect_to root_path
       end
     end
   end

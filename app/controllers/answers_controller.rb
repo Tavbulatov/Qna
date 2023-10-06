@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
 
   after_action :publish_answer, only: :create
+  authorize_resource
 
   def create
     @question = Question.find(params[:question_id])
@@ -13,19 +14,13 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.user?(current_user)
-      @answer.update(answer_params)
-      flash[:notice] = 'Answer edited successfully'
-    end
+    @answer.update(answer_params)
+    flash[:notice] = 'Answer edited successfully'
   end
 
   def destroy
-    if @answer.author == current_user
-      @answer.destroy
-      flash[:notice] = 'Your reply has been successfully deleted'
-    else
-      flash[:alert] = "You cannot delete someone else's answer"
-    end
+    @answer.destroy
+    flash[:notice] = 'Your reply has been successfully deleted'
   end
 
   def best
