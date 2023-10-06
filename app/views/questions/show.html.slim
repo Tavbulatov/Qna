@@ -9,7 +9,7 @@
   h4 = "Rating question"
   p id = "Question-#{@question.id}" = @question.rating
 
-  -if @question.user?(current_user)
+  -if can? :update, @question
     = link_to "Edit", '#', class: 'edit-question-link'
 
   -if @question.reward.present?

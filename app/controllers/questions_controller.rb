@@ -1,11 +1,12 @@
 class QuestionsController < ApplicationController
+
   before_action :authenticate_user!, except: %i[index show ]
 
   before_action :find_question, only: %i[show destroy update]
   before_action :set_gon_user_id, only: %i[index create show]
 
   after_action :publish_question, only: :create
-
+  authorize_resource
   def index
     @questions = Question.all
   end
@@ -21,10 +22,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.user?(current_user)
-      @question.update(question_params)
-      flash[:notice] = 'Your question has been successfully edited.'
-    end
+    @question.update(question_params)
+    flash[:notice] = 'Your question has been successfully edited.'
   end
 
   def create
@@ -37,12 +36,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.user?(current_user)
-      @question.destroy
-      redirect_to questions_path, notice: 'Your question has been successfully deleted'
-    else
-      redirect_to questions_path, alert: "You can't delete someone else's question"
-    end
+    @question.destroy
+    redirect_to questions_path, notice: 'Your question has been successfully deleted'
   end
 
   private

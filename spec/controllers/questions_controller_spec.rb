@@ -194,11 +194,7 @@ RSpec.describe QuestionsController, type: :controller do
       before { delete :destroy, params: { id: question } }
 
       it 'redirect to questions page' do
-        expect(response).to redirect_to questions_path
-      end
-
-      it 'sets a flash message' do
-        expect(flash[:alert]).to eq("You can't delete someone else's question")
+        expect(response).to redirect_to root_path
       end
     end
   end

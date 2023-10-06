@@ -39,6 +39,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-vkontakte'
 gem "omniauth-rails_csrf_protection"
+gem 'cancancan'
 
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
