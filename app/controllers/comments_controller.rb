@@ -15,12 +15,11 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
+    authorize! :destroy, comment
 
-    if can? :destroy, comment
-      comment.destroy
-      flash[:notice] = 'Your comment has been successfully deleted'
-      render_json(flash[:notice])
-    end
+    comment.destroy
+    flash[:notice] = 'Your comment has been successfully deleted'
+    render_json(flash[:notice])
   end
 
   private
