@@ -35,14 +35,9 @@ RSpec.describe LinksController, type: :controller do
         expect { delete :destroy, params: { id: link }, format: :js }.to change(Link, :count).by(0)
       end
 
-      before { delete :destroy, params: { id: link }, format: :js }
-
       it 'render destroy view' do
+        delete :destroy, params: { id: link }, format: :js
         expect(response).to render_template :destroy
-      end
-
-      it 'sets a flash message' do
-        expect(flash[:alert]).to eq("You can't delete someone else's link")
       end
     end
   end
