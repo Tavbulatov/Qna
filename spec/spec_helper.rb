@@ -14,6 +14,7 @@
 #
 require 'capybara/rspec'
 require 'capybara/email/rspec'
+require 'cancan/matchers'
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   Capybara.server = :puma
