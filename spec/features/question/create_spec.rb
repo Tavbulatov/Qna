@@ -7,6 +7,12 @@ feature 'User can create question', "
 " do
   given(:user) { create(:user) }
 
+  scenario 'Unauthenticated user tries to ask a question' do
+    visit questions_path
+
+    expect(page).to_not have_link('Ask question')
+  end
+
   describe 'Authenticated user' do
     background do
       sign_in(user)
@@ -42,12 +48,6 @@ feature 'User can create question', "
     end
   end
 
-  scenario 'Unauthenticated user tries to ask a question' do
-    visit questions_path
-    click_on 'Ask question'
-
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
-  end
 
   describe 'multiple session', js: true do
     scenario 'when you create a question, it appears on another user’s page' do

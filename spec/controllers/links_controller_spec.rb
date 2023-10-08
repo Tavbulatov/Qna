@@ -37,7 +37,7 @@ RSpec.describe LinksController, type: :controller do
 
       it 'render destroy view' do
         delete :destroy, params: { id: link }, format: :js
-        expect(response).to render_template :destroy
+        expect(response).to redirect_to root_path
       end
     end
   end
