@@ -41,6 +41,8 @@ gem 'omniauth-vkontakte'
 gem "omniauth-rails_csrf_protection"
 gem 'cancancan'
 
+gem 'doorkeeper', '~> 5.6', '>= 5.6.6'
+
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
   gem 'rails-controller-testing'
