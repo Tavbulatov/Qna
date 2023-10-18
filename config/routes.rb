@@ -31,5 +31,16 @@ Rails.application.routes.draw do
     get 'confirmation/:confirmation_token', action: 'confirmation', as: :confirmation
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: %i[] do
+        collection do
+          get 'me'
+          get 'all'
+        end
+      end
+    end
+  end
+
   mount ActionCable.server => '/cable'
 end

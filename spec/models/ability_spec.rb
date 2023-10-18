@@ -29,5 +29,14 @@ RSpec.describe Ability, type: :model do
     it { should be_able_to :destroy, create(:comment, commentable: question, author: user) }
 
     it { should be_able_to :best, answer }
+
+    it { should be_able_to :me, user }
+
+    it 'all' do
+      user.update(admin: true)
+      user.reload
+
+      should be_able_to :all, user
+    end
   end
 end

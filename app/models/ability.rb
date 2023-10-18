@@ -7,7 +7,12 @@ class Ability
 
   def initialize(user)
     @user = user
-    user ? user_abilities : guest_abilities
+
+    if user&.admin?
+      can :manage, :all
+    else
+      user ? user_abilities : guest_abilities
+    end
   end
 
   def user_abilities
@@ -20,6 +25,9 @@ class Ability
     can :destroy, Link, linkable: { author_id: user.id }
 
     can :best, Answer, question: { author_id: user.id }
+
+    can :me, User, id: user.id
+    can :all, User, admin: true
   end
 
   def guest_abilities
