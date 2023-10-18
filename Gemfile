@@ -42,6 +42,8 @@ gem "omniauth-rails_csrf_protection"
 gem 'cancancan'
 
 gem 'doorkeeper', '~> 5.6', '>= 5.6.6'
+gem 'active_model_serializers', '~> 0.10.2'
+gem 'oj'
 
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
