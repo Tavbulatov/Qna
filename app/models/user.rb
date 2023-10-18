@@ -12,6 +12,10 @@ class User < ApplicationRecord
 
   validates :last_name, :first_name, presence: true
 
+  def admin?
+    admin
+  end
+
   def self.find_for_oauth(auth)
     FindForOauth.new(auth).call
   end
