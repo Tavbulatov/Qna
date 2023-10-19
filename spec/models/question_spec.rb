@@ -26,21 +26,8 @@ RSpec.describe Question, type: :model do
   let!(:link_gists) { create_list(:link, 2, :url_gist, linkable: question) }
   let!(:vote) { create(:vote, author: user, votable: question) }
 
-  context 'gists_url' do
-    it { expect(question.gists_url).to match_array(link_gists.map(&:url)) }
-  end
-
-  context 'gists_id' do
-    it { expect(question.gists_id).to match_array(link_gists.map(&:id)) }
-  end
-
-  context 'gists' do
-    it { expect(question.gists).to match_array(link_gists) }
-  end
-
-  context 'gists' do
-    it { expect(question.gists).to match_array(link_gists) }
-  end
+  let(:resource) { question }
+  it_behaves_like 'gists extract from links'
 
   context 'vote_author' do
     it { expect(question.vote_author(user)).to eq(vote) }

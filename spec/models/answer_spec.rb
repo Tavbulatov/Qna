@@ -20,11 +20,6 @@ RSpec.describe Answer, type: :model do
   let!(:links) { create_list(:link, 2, linkable: answer) }
   let!(:link_gists) { create_list(:link, 2, :url_gist, linkable: answer) }
 
-  context 'gists_url' do
-    it { expect(answer.gists_url).to match_array(link_gists.map(&:url)) }
-  end
-
-  context 'gists_id' do
-    it { expect(answer.gists_id).to match_array(link_gists.map(&:id)) }
-  end
+  let(:resource) { answer }
+  it_behaves_like 'gists extract from links'
 end
