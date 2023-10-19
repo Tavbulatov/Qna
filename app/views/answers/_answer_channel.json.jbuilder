@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 json.extract! answer, :id, :body
 author_id = answer.author.id
 
 json.author_id author_id
 json.rating answer.rating
 json.authenticity_token authenticity_token
-
 
 json.links answer.links.each do |link|
   json.id link.id

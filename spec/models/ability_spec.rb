@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Ability, type: :model do
-  subject(:ability) {Ability.new(user)}
+  subject(:ability) { Ability.new(user) }
 
   describe 'for guest' do
-    let(:user){ nil }
-    it {should be_able_to :read, :all}
+    let(:user) { nil }
+    it { should be_able_to :read, :all }
   end
 
   describe 'for user' do
-    let(:user){ create :user }
+    let(:user) { create :user }
     let(:question) { create(:question, author: user) }
     let(:answer) { create(:answer, author: user, question: question) }
 

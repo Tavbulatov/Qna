@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'Wiev all questions', "
@@ -17,7 +19,7 @@ feature 'Wiev all questions', "
     end
 
     scenario 'go to the question page by clicking on the question title' do
-      click_on("#{question.title}")
+      click_on(question.title.to_s)
 
       expect(page).to have_content question.title
     end

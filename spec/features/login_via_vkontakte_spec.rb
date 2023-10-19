@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'VKontakte', type: :feature do
-
   scenario 'can sign in user with Vkontakte account' do
     visit new_user_session_path
     click_on 'Sign in with Vkontakte'
@@ -17,8 +18,8 @@ RSpec.feature 'VKontakte', type: :feature do
     expect(page).to have_current_path(root_path)
   end
 
-  given(:user){ create(:user) }
-  given!(:authorization){ create(:authorization, user: user, confirmed_at: Date.current)}
+  given(:user) { create(:user) }
+  given!(:authorization) { create(:authorization, user: user, confirmed_at: Date.current) }
 
   scenario 'the user is authenticated once and does not need to enter an email address' do
     mock_auth_hash_vkontakte

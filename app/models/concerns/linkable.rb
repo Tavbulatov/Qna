@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Linkable
   extend ActiveSupport::Concern
 
@@ -14,7 +16,7 @@ module Linkable
     end
 
     def gists
-      links.select { |l| l.gist? }
+      links.select(&:gist?)
     end
   end
 end

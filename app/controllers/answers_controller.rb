@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :find_answer, only: %i[destroy update best]
   before_action :authenticate_user!
@@ -7,10 +9,10 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.create(answer_params.merge(author: current_user ))
-    if @answer.persisted?
-      flash[:notice] = 'Answer created successfully'
-    end
+    @answer = @question.answers.create(answer_params.merge(author: current_user))
+    return unless @answer.persisted?
+
+    flash[:notice] = 'Answer created successfully'
   end
 
   def update
@@ -38,7 +40,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body, files: [], links_attributes: [:name, :url])
+    params.require(:answer).permit(:body, files: [], links_attributes: %i[name url])
   end
 
   def find_answer
@@ -49,8 +51,8 @@ class AnswersController < ApplicationController
     return if @answer.errors.present?
 
     ActionCable.server.broadcast("question_#{@question.id}",
-      ApplicationController.render(partial: 'answers/answer_channel',
-      locals: { answer: @answer, authenticity_token: form_authenticity_token })
-    )
+                                 ApplicationController.render(partial: 'answers/answer_channel',
+                                                              locals: { answer: @answer,
+                                                                        authenticity_token: form_authenticity_token }))
   end
 end

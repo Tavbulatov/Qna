@@ -1,6 +1,7 @@
-class QuestionsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :authenticate_user!, except: %i[index show ]
+class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
 
   before_action :find_question, only: %i[show destroy update]
   before_action :set_gon_user_id, only: %i[index create show]
@@ -45,7 +46,7 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body, files: [],
-                    reward_attributes: [:name, :image], links_attributes: [:name, :url])
+                                                    reward_attributes: %i[name image], links_attributes: %i[name url])
   end
 
   def find_question
@@ -60,8 +61,7 @@ class QuestionsController < ApplicationController
     return if @question.errors.present?
 
     ActionCable.server.broadcast('questions',
-      ApplicationController.render(partial: 'questions/question_channel',
-      locals: { question: @question })
-    )
+                                 ApplicationController.render(partial: 'questions/question_channel',
+                                                              locals: { question: @question }))
   end
 end

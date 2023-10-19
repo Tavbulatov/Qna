@@ -1,12 +1,18 @@
-class Api::V1::ProfilesController < Api::V1::BaseController
-  authorize_resource class: User
-  respond_to :json
+# frozen_string_literal: true
 
-  def me
-    respond_with current_resource_owner
-  end
+module Api
+  module V1
+    class ProfilesController < Api::V1::BaseController
+      authorize_resource class: User
+      respond_to :json
 
-  def all
-    respond_with User.all.where.not(id: current_resource_owner.id)
+      def me
+        respond_with current_resource_owner
+      end
+
+      def all
+        respond_with User.all.where.not(id: current_resource_owner.id)
+      end
+    end
   end
 end

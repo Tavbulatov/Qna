@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Profiles API', type: :request do
-  let(:headers) { { "CONTENT_TYPE" => "application/json",
-                     "ACCEPT" => 'application/json' } }
+  let(:headers) do
+    { 'CONTENT_TYPE' => 'application/json',
+      'ACCEPT' => 'application/json' }
+  end
 
   let(:me) { create(:user) }
-  let(:access_token) {create(:access_token, resource_owner_id: me.id)}
+  let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
   describe 'GET api/v1/profiles/me' do
     let(:api_path) { '/api/v1/profiles/me' }
@@ -14,8 +18,10 @@ describe 'Profiles API', type: :request do
     it_behaves_like 'API Authorizable'
 
     context 'authorized' do
-      before { get api_path, params: { access_token: access_token.token },
-                                          headers: headers }
+      before do
+        get api_path, params: { access_token: access_token.token },
+                      headers: headers
+      end
 
       it_behaves_like 'API return status'
 

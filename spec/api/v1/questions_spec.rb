@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Questions API', type: :request do
-  let(:headers) { { "ACCEPT" => 'application/json' } }
-  let(:access_token) {create(:access_token) }
+  let(:headers) { { 'ACCEPT' => 'application/json' } }
+  let(:access_token) { create(:access_token) }
   let!(:questions) { create_list(:question_with_file, 2) }
   let(:question) { questions.first }
 
@@ -40,12 +42,14 @@ describe 'Questions API', type: :request do
 
     context 'authorized' do
       context 'show' do
-        let!(:answers) {create_list(:answer, 2, question: question)}
-        let!(:comments) {create_list(:comment, 2, commentable: question)}
-        let!(:links) {create_list(:link, 2, linkable: question)}
+        let!(:answers) { create_list(:answer, 2, question: question) }
+        let!(:comments) { create_list(:comment, 2, commentable: question) }
+        let!(:links) { create_list(:link, 2, linkable: question) }
 
-        before { get api_path, params: { access_token: access_token.token },
-                                                         headers: headers }
+        before do
+          get api_path, params: { access_token: access_token.token },
+                        headers: headers
+        end
 
         it_behaves_like 'API return status'
 
@@ -80,22 +84,26 @@ describe 'Questions API', type: :request do
   end
 
   describe 'POST api/v1/questions' do
-    let(:api_path) { "/api/v1/questions" }
+    let(:api_path) { '/api/v1/questions' }
     let(:method) { :post }
 
     it_behaves_like 'API Authorizable'
 
     context 'authorized' do
       context 'create' do
-        before { post api_path, params: { access_token: access_token.token,
-                                          question: attributes_for(:question) },
-                                          headers: headers}
+        before do
+          post api_path, params: { access_token: access_token.token,
+                                   question: attributes_for(:question) },
+                         headers: headers
+        end
         it_behaves_like 'API return status'
 
         it 'create new question' do
-          expect { post api_path, params: { access_token: access_token.token,
-                                            question: attributes_for(:question) },
-                                            headers: headers}.to change(Question, :count).by(1)
+          expect do
+            post api_path, params: { access_token: access_token.token,
+                                     question: attributes_for(:question) },
+                           headers: headers
+          end.to change(Question, :count).by(1)
         end
       end
     end
@@ -109,9 +117,11 @@ describe 'Questions API', type: :request do
 
     context 'authorized' do
       context 'update' do
-        before { patch api_path, params: { access_token: access_token.token,
-                                 question:{ title: 'updated title'} },
-                                 headers: headers}
+        before do
+          patch api_path, params: { access_token: access_token.token,
+                                    question: { title: 'updated title' } },
+                          headers: headers
+        end
         it_behaves_like 'API return status'
 
         it 'update question' do
@@ -131,12 +141,14 @@ describe 'Questions API', type: :request do
     context 'authorized' do
       context 'delete' do
         it 'returns 200 status' do
-          delete api_path, params: { access_token: access_token.token}, headers: headers
+          delete api_path, params: { access_token: access_token.token }, headers: headers
           expect(response).to be_successful
         end
 
         it 'delete question' do
-          expect{ delete api_path, params: { access_token: access_token.token}, headers: headers }.to change(Question, :count).by(-1)
+          expect do
+            delete api_path, params: { access_token: access_token.token }, headers: headers
+          end.to change(Question, :count).by(-1)
         end
       end
     end

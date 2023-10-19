@@ -1,39 +1,45 @@
-class Api::V1::QuestionsController < Api::V1::BaseController
-  before_action :set_question, only: %i[show update destroy]
-  respond_to :json
+# frozen_string_literal: true
 
-  def index
-    respond_with Question.all, each_serializer: QuestionsSerializer
-  end
+module Api
+  module V1
+    class QuestionsController < Api::V1::BaseController
+      before_action :set_question, only: %i[show update destroy]
+      respond_to :json
 
-  def show
-    respond_with @question, serializer: QuestionSerializer
-  end
+      def index
+        respond_with Question.all, each_serializer: QuestionsSerializer
+      end
 
-  def create
-    @question = current_resource_owner.questions.create(question_params)
+      def show
+        respond_with @question, serializer: QuestionSerializer
+      end
 
-    respond_with @question, serializer: QuestionSerializer
-  end
+      def create
+        @question = current_resource_owner.questions.create(question_params)
 
-  def update
-    @question.update(question_params)
+        respond_with @question, serializer: QuestionSerializer
+      end
 
-    render json: @question, serializer: QuestionSerializer
-  end
+      def update
+        @question.update(question_params)
 
-  def destroy
-    @question.destroy
-  end
+        render json: @question, serializer: QuestionSerializer
+      end
 
-  private
+      def destroy
+        @question.destroy
+      end
 
-  def set_question
-    @question = Question.with_attached_files.find(params[:id])
-  end
+      private
 
-  def question_params
-    params.require(:question).permit(:title, :body, files: [],
-      reward_attributes: [:name, :image], links_attributes: [:name, :url])
+      def set_question
+        @question = Question.with_attached_files.find(params[:id])
+      end
+
+      def question_params
+        params.require(:question).permit(:title, :body, files: [],
+                                                        reward_attributes: %i[name image], links_attributes: %i[name url])
+      end
+    end
   end
 end

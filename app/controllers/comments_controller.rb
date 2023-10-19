@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   include VotableCommentable
   authorize_resource
 
   def create
     comment = set_resource(:commentable).comments.create(params_comment)
-    if comment.persisted?
-      flash[:notice] = 'You have added a comment'
-    end
+    flash[:notice] = 'You have added a comment' if comment.persisted?
 
     render_json(comment, flash[:notice])
 
-    ActionCable.server.broadcast("comments", comment.to_json)
+    ActionCable.server.broadcast('comments', comment.to_json)
   end
 
   def destroy

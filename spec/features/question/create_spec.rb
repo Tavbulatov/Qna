@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User can create question', "
@@ -47,7 +49,6 @@ feature 'User can create question', "
       expect(page).to have_link 'spec_helper.rb'
     end
   end
-
 
   describe 'multiple session', js: true do
     scenario 'when you create a question, it appears on another user’s page' do

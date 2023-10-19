@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe OauthCallbacksController, type: :controller do
   before do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @request.env['devise.mapping'] = Devise.mappings[:user]
   end
 
   describe 'Github' do
-    let(:oauth_data) { {'provider' => 'github', 'uid' => 123 } }
+    let(:oauth_data) { { 'provider' => 'github', 'uid' => 123 } }
 
     it 'finds user from oauth data' do
       allow(request.env).to receive(:[]).and_call_original
@@ -49,7 +51,7 @@ RSpec.describe OauthCallbacksController, type: :controller do
   end
 
   describe 'Vkontakte' do
-    let(:auth) { OmniAuth::AuthHash.new(provider: 'vkontakte', uid: 123123)  }
+    let(:auth) { OmniAuth::AuthHash.new(provider: 'vkontakte', uid: 123_123) }
 
     it 'finds user from oauth data' do
       allow(request.env).to receive(:[]).and_call_original

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
@@ -37,7 +39,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'GET #show' do
     let(:question) { create(:question) }
     let!(:answers) { create_list(:answer, 3, question: question) }
-    let!(:best_answer) { create(:answer, question: question)}
+    let!(:best_answer) { create(:answer, question: question) }
 
     before do
       question.update(best_answer: best_answer)
@@ -95,16 +97,18 @@ RSpec.describe QuestionsController, type: :controller do
     let(:question) { create(:question_with_file, author: user) }
 
     context 'with valid attributes' do
-      before { patch :update, params: { id: question, question: {title: "Question", body: "text text"} }, format: :js }
+      before do
+        patch :update, params: { id: question, question: { title: 'Question', body: 'text text' } }, format: :js
+      end
 
       it 'Edit title' do
         question.reload
-        expect(question.title).to eq("Question")
+        expect(question.title).to eq('Question')
       end
 
       it 'Edit body' do
         question.reload
-        expect(question.body).to eq("text text")
+        expect(question.body).to eq('text text')
       end
 
       it 'renders update view' do
@@ -119,36 +123,36 @@ RSpec.describe QuestionsController, type: :controller do
     context 'with invalid attributes' do
       it 'Title attribute has not changed' do
         expect do
-          patch :update, params: { id: question, question: attributes_for(:question, :invalid)}, format: :js
+          patch :update, params: { id: question, question: attributes_for(:question, :invalid) }, format: :js
         end.to_not change(question, :title)
       end
 
       it 'Body attribute has not changed' do
         expect do
-          patch :update, params: { id: question, question: attributes_for(:question, :invalid)}, format: :js
+          patch :update, params: { id: question, question: attributes_for(:question, :invalid) }, format: :js
         end.to_not change(question, :body)
       end
 
       it 'render new view' do
-        patch :update, params: { id: question, question: attributes_for(:question, :invalid)}, format: :js
+        patch :update, params: { id: question, question: attributes_for(:question, :invalid) }, format: :js
         expect(response).to render_template :update
       end
     end
 
-    context "Not the author trying to edit" do
+    context 'Not the author trying to edit' do
       let(:other_user) { create(:user) }
 
       before { login(other_user) }
 
       it 'Title attribute has not changed' do
         expect do
-          patch :update, params: { id: question, question: {title: "Question", body: "text text"} }, format: :js
+          patch :update, params: { id: question, question: { title: 'Question', body: 'text text' } }, format: :js
         end.to_not change(question, :title)
       end
 
       it 'Body attribute has not changed' do
         expect do
-          patch :update, params: { id: question, question: {title: "Question", body: "text text"} }, format: :js
+          patch :update, params: { id: question, question: { title: 'Question', body: 'text text' } }, format: :js
         end.to_not change(question, :body)
       end
     end
@@ -157,7 +161,7 @@ RSpec.describe QuestionsController, type: :controller do
       let(:new_file) { fixture_file_upload(Rails.root.join('spec', 'spec_helper.rb'), 'application/ruby') }
 
       it 'attachment list change' do
-        patch :update, params: {id: question, question: {files: [new_file] } }, format: :js
+        patch :update, params: { id: question, question: { files: [new_file] } }, format: :js
         question.reload
 
         expect(question.files.first.filename).to eq('spec_helper.rb')

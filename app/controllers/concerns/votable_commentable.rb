@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module VotableCommentable
   extend ActiveSupport::Concern
 
   def render_json(*data)
     respond_to do |format|
-      format.json { render json: data}
+      format.json { render json: data }
     end
   end
 

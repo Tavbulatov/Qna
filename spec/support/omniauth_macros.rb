@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 module OmniauthMacros
   def mock_auth_hash_vkontakte
-    OmniAuth.config.mock_auth[:vkontakte] = OmniAuth::AuthHash.new( { provider: 'vkontakte',
-                                                                      uid: '123123',
-                                                                      info: {
-                                                                        name: 'Test User'
-                                                                      }
-                                                                    })
-
+    OmniAuth.config.mock_auth[:vkontakte] = OmniAuth::AuthHash.new({ provider: 'vkontakte',
+                                                                     uid: '123123',
+                                                                     info: {
+                                                                       name: 'Test User'
+                                                                     } })
   end
 
   def mock_auth_hash_github
@@ -15,7 +15,6 @@ module OmniauthMacros
                                                                   info: {
                                                                     email: 'test@example.com',
                                                                     name: 'Test User'
-                                                                  }
-                                                                })
+                                                                  } })
   end
 end

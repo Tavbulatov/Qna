@@ -1,42 +1,49 @@
-class Api::V1::AnswersController < Api::V1::BaseController
-  before_action :set_question, only: %i[index create]
-  before_action :set_answer, only: %i[show destroy update]
+# frozen_string_literal: true
 
-  def index
-    render json: @question.answers, each_serializer: AnswersSerializer
-  end
+module Api
+  module V1
+    class AnswersController < Api::V1::BaseController
+      before_action :set_question, only: %i[index create]
+      before_action :set_answer, only: %i[show destroy update]
 
-  def show
-    render json: @answer, serializer: AnswerSerializer
-  end
+      def index
+        render json: @question.answers, each_serializer: AnswersSerializer
+      end
 
-  def create
-    @answer = @question.answers.create(answer_params)
+      def show
+        render json: @answer, serializer: AnswerSerializer
+      end
 
-    render json: @answer, serializer: AnswerSerializer
-  end
+      def create
+        @answer = @question.answers.create(answer_params)
 
-  def update
-    @answer.update(answer_params)
+        render json: @answer, serializer: AnswerSerializer
+      end
 
-    render json: @answer, serializer: AnswerSerializer
-  end
+      def update
+        @answer.update(answer_params)
 
-  def destroy
-    @answer.destroy
-  end
+        render json: @answer, serializer: AnswerSerializer
+      end
 
-  private
+      def destroy
+        @answer.destroy
+      end
 
-  def answer_params
-    params.require(:answer).permit(:body, files: [], links_attributes: [:name, :url]).merge(author: current_resource_owner)
-  end
+      private
 
-  def set_question
-    @question = Question.find(params[:question_id])
-  end
+      def answer_params
+        params.require(:answer).permit(:body, files: [],
+                                              links_attributes: %i[name url]).merge(author: current_resource_owner)
+      end
 
-  def set_answer
-    @answer = Answer.with_attached_files.find(params[:id])
+      def set_question
+        @question = Question.find(params[:question_id])
+      end
+
+      def set_answer
+        @answer = Answer.with_attached_files.find(params[:id])
+      end
+    end
   end
 end

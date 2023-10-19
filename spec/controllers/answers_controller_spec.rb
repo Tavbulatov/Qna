@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
@@ -10,10 +12,13 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with valid attributes' do
       it 'saves a new answer in the database' do
-        expect { post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js }.to change(Answer, :count).by(1)
+        expect do
+          post :create, params: { question_id: question, answer: attributes_for(:answer) },
+                        format: :js
+        end.to change(Answer, :count).by(1)
       end
 
-      before { post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js  }
+      before { post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js }
 
       it 'render create view' do
         expect(response).to render_template :create
@@ -26,7 +31,10 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with invalid attributes' do
       it 'answer not saved' do
-        expect { post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) }, format: :js  }.to_not change(Answer, :count)
+        expect do
+          post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) },
+                        format: :js
+        end.to_not change(Answer, :count)
       end
 
       it 'render create view' do
@@ -38,7 +46,7 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PATCH #update' do
     before { login(user) }
-    before { patch :update, params: {id: answer, answer: {body: 'answer'} }, format: :js }
+    before { patch :update, params: { id: answer, answer: { body: 'answer' } }, format: :js }
 
     context 'with valid attributes' do
       it 'Edit body' do
@@ -57,22 +65,27 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with invalid attributes' do
       it 'answer not saved' do
-        expect { patch :update, params: {id: answer, answer: attributes_for(:answer, :invalid) },format: :js }.to_not change(answer, :body)
+        expect do
+          patch :update, params: { id: answer, answer: attributes_for(:answer, :invalid) },
+                         format: :js
+        end.to_not change(answer, :body)
       end
 
       it 'render update view' do
-        patch :update, params: {id: answer, answer: attributes_for(:answer, :invalid) }, format: :js
+        patch :update, params: { id: answer, answer: attributes_for(:answer, :invalid) }, format: :js
         expect(response).to render_template :update
       end
     end
 
-    context "Not the author trying to edit" do
+    context 'Not the author trying to edit' do
       let(:other_user) { create(:user) }
 
       before { login(other_user) }
 
       it 'Title attribute has not changed' do
-        expect {patch :update, params: {id: answer, answer: {body: 'answer'} }, format: :js}.to_not change(answer, :body)
+        expect do
+          patch :update, params: { id: answer, answer: { body: 'answer' } }, format: :js
+        end.to_not change(answer, :body)
       end
     end
 
@@ -80,7 +93,7 @@ RSpec.describe AnswersController, type: :controller do
       let(:new_file) { fixture_file_upload(Rails.root.join('spec', 'spec_helper.rb'), 'application/ruby') }
 
       it 'attachment list change' do
-        patch :update, params: {id: answer, answer: {files: [new_file] } }, format: :js
+        patch :update, params: { id: answer, answer: { files: [new_file] } }, format: :js
         answer.reload
 
         expect(answer.files.first.filename).to eq('spec_helper.rb')
@@ -89,13 +102,13 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-
-
     before { login(user) }
 
     context 'delete from db' do
       it 'deletes the answer' do
-        expect { delete :destroy, params: { question_id: question, id: answer }, format: :js }.to change(Answer, :count).by(-1)
+        expect do
+          delete :destroy, params: { question_id: question, id: answer }, format: :js
+        end.to change(Answer, :count).by(-1)
       end
     end
 
@@ -113,10 +126,12 @@ RSpec.describe AnswersController, type: :controller do
 
     context "trying to delete someone else's answer" do
       let(:other_user) { create(:user) }
-      before {login(other_user) }
+      before { login(other_user) }
 
       it 'answer is not deleted' do
-        expect { delete :destroy, params: { question_id: question, id: answer }, format: :js }.to_not change(Answer, :count)
+        expect do
+          delete :destroy, params: { question_id: question, id: answer }, format: :js
+        end.to_not change(Answer, :count)
       end
 
       before { delete :destroy, params: { question_id: question, id: answer }, format: :js }
@@ -128,11 +143,11 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #best' do
-    let!(:reward) { create(:reward, question: question)}
+    let!(:reward) { create(:reward, question: question) }
     let!(:answers) { create_list(:answer, 3, question: question) }
 
     before { login(user) }
-    before { patch :best, params: {id: answer}, format: :js }
+    before { patch :best, params: { id: answer }, format: :js }
 
     it 'all answers except the best answer' do
       expect(assigns(:answers)).to_not include(answer)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'gists extract from links' do
   context 'gists_url' do
     it { expect(resource.gists_url).to match_array(link_gists.map(&:url)) }

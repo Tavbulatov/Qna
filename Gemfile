@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -31,18 +33,18 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'slim-rails'
 
 gem 'aws-sdk-s3', require: false
+gem 'cancancan'
 gem 'cocoon'
 gem 'devise', '~> 4.9', '>= 4.9.2'
-gem 'jquery-rails'
 gem 'gon'
+gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-vkontakte'
-gem "omniauth-rails_csrf_protection"
-gem 'cancancan'
 
-gem 'doorkeeper', '~> 5.6', '>= 5.6.6'
 gem 'active_model_serializers', '~> 0.10.2'
+gem 'doorkeeper', '~> 5.6', '>= 5.6.6'
 gem 'oj'
 
 group :test do
@@ -51,9 +53,9 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'capybara-email'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'webdrivers'
-  gem 'capybara-email'
 end
 
 group :development, :test do
@@ -71,8 +73,8 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'letter_opener'
   gem 'spring'
-  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

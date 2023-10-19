@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Authorization, type: :model do
@@ -6,8 +8,8 @@ RSpec.describe Authorization, type: :model do
   it { should validate_presence_of(:uid) }
 
   describe 'Confirmation' do
-    let(:user){ create(:user) }
-    let(:authorization){ create(:authorization, user: user) }
+    let(:user) { create(:user) }
+    let(:authorization) { create(:authorization, user: user) }
 
     it 'confirmed?' do
       expect(authorization.confirmed?).to eq(authorization.confirmed_at)

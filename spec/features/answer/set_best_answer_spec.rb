@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'The user chooses the best answer', '
@@ -12,6 +14,7 @@ feature 'The user chooses the best answer', '
     scenario 'choosing the best answer on the question page' do
       sign_in(user)
       visit question_path(question)
+      sleep 0.5
       click_on('Best')
       sleep 0.5
       within '.best_answer' do

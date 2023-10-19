@@ -16,7 +16,6 @@ Doorkeeper.configure do
   # every time somebody will try to access the admin web interface.
   #
   admin_authenticator do
-
     if current_user
       head :forbidden unless current_user.admin?
     else
@@ -83,12 +82,12 @@ Doorkeeper.configure do
 
   # Authorization Code expiration time (default: 10 minutes).
   #
-  authorization_code_expires_in Rails.env == "development" ? 2.hours : 10.minutes
+  authorization_code_expires_in Rails.env == 'development' ? 2.hours : 10.minutes
 
   # Access token expiration time (default: 2 hours).
   # If you want to disable expiration, set this to `nil`.
   #
-  access_token_expires_in Rails.env == "development" ? 24.hours : 2.hours
+  access_token_expires_in Rails.env == 'development' ? 24.hours : 2.hours
 
   # Assign custom TTL for access tokens. Will be used instead of access_token_expires_in
   # option if defined. In case the block returns `nil` value Doorkeeper fallbacks to

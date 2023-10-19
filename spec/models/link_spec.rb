@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Link, type: :model do
@@ -9,9 +11,11 @@ RSpec.describe Link, type: :model do
 
   let(:user) { create(:user) }
   let(:question) { create(:question, author: user) }
-  let(:link) { create(:link,
-                       url: 'https://gist.github.com/Tavbulatov/02a8dea29d1bea8671959fb6e7f121cd',
-                       linkable: question ) }
+  let(:link) do
+    create(:link,
+           url: 'https://gist.github.com/Tavbulatov/02a8dea29d1bea8671959fb6e7f121cd',
+           linkable: question)
+  end
 
   it { expect(link.gist?).to eq(true) }
 end

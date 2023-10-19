@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.feature 'Github', type: :feature do
-
   scenario 'can sign in user with Github account' do
     mock_auth_hash_github
     visit new_user_session_path

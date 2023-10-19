@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def flash_message_css_class(key)
     case key.to_sym

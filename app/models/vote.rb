@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Vote < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :votable, polymorphic: true
@@ -8,8 +10,8 @@ class Vote < ApplicationRecord
   private
 
   def user_can_vote_once_per_votable
-    if Vote.exists?(author: author, votable: votable, votable_type: votable_type)
-      errors.add(:vote, "Вы уже проголосовали")
-    end
+    return unless Vote.exists?(author: author, votable: votable, votable_type: votable_type)
+
+    errors.add(:vote, 'Вы уже проголосовали')
   end
 end

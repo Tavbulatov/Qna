@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionSerializer < ActiveModel::Serializer
   # вопрос (включает в себя список комментариев, список прикрепленных файлов в виде url и
   # список прикрепленных ссылок)
@@ -9,6 +11,6 @@ class QuestionSerializer < ActiveModel::Serializer
   has_many :links
 
   def files
-    object.files.map {_1.url}
+    object.files.map(&:url)
   end
 end

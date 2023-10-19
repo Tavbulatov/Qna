@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Answers API', type: :request do
-  let(:headers) { { "ACCEPT" => 'application/json' } }
+  let(:headers) { { 'ACCEPT' => 'application/json' } }
 
-  let(:access_token) {create(:access_token)}
+  let(:access_token) { create(:access_token) }
   let!(:question) { create(:question) }
   let!(:answers) { create_list(:answer_with_file, 2, question: question) }
   let!(:answer) { answers.first }
@@ -42,11 +44,13 @@ describe 'Answers API', type: :request do
 
     context 'authorized' do
       context 'show' do
-        let!(:comments) {create_list(:comment, 2, commentable: answer)}
-        let!(:links) {create_list(:link, 2, linkable: answer)}
+        let!(:comments) { create_list(:comment, 2, commentable: answer) }
+        let!(:links) { create_list(:link, 2, linkable: answer) }
         let(:answer_json) { json['answer'] }
-        before { get api_path, params: { access_token: access_token.token },
-                                                         headers: headers }
+        before do
+          get api_path, params: { access_token: access_token.token },
+                        headers: headers
+        end
 
         it_behaves_like 'API return status'
 
@@ -83,15 +87,19 @@ describe 'Answers API', type: :request do
 
     context 'authorized' do
       context 'create' do
-        before { post api_path, params: { access_token: access_token.token,
-                                                                  answer: attributes_for(:answer) },
-                                                                  headers: headers}
+        before do
+          post api_path, params: { access_token: access_token.token,
+                                   answer: attributes_for(:answer) },
+                         headers: headers
+        end
         it_behaves_like 'API return status'
 
         it 'create new answer' do
-          expect { post api_path, params: { access_token: access_token.token,
-                                  answer: attributes_for(:answer) },
-                                  headers: headers}.to change(Answer, :count).by(1)
+          expect do
+            post api_path, params: { access_token: access_token.token,
+                                     answer: attributes_for(:answer) },
+                           headers: headers
+          end.to change(Answer, :count).by(1)
         end
       end
     end
@@ -105,9 +113,11 @@ describe 'Answers API', type: :request do
 
     context 'authorized' do
       context 'update' do
-        before { patch api_path, params: { access_token: access_token.token,
-                                                       answer:{ body: 'updated body'} },
-                                                       headers: headers}
+        before do
+          patch api_path, params: { access_token: access_token.token,
+                                    answer: { body: 'updated body' } },
+                          headers: headers
+        end
         it_behaves_like 'API return status'
 
         it 'update answer' do
@@ -132,7 +142,9 @@ describe 'Answers API', type: :request do
         end
 
         it 'delete answer' do
-          expect{ delete api_path, params: { access_token: access_token.token}, headers: headers }.to change(Answer, :count).by(-1)
+          expect do
+            delete api_path, params: { access_token: access_token.token }, headers: headers
+          end.to change(Answer, :count).by(-1)
         end
       end
     end

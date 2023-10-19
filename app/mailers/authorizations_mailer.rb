@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorizationsMailer < ApplicationMailer
   def authorization_confirmation(authorization)
     @authorization = authorization

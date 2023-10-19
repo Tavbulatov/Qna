@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :set_user
 
@@ -12,11 +14,11 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
   def vkontakte
     auth = request.env['omniauth.auth']
 
-    if @user&.authorizations&.find_by(provider: auth.provider, uid: auth.uid.to_s )&.confirmed?
+    if @user&.authorizations&.find_by(provider: auth.provider, uid: auth.uid.to_s)&.confirmed?
       authentication_user
     else
       redirect_to new_authorization_path(provider: auth.provider, uid: auth.uid.to_s),
-      notice: 'Enter your email for authorization and further confirmation of authorization'
+                  notice: 'Enter your email for authorization and further confirmation of authorization'
     end
   end
 

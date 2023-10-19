@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
@@ -8,11 +10,17 @@ RSpec.describe CommentsController, type: :controller do
   describe 'POST #create' do
     before { login(user) }
 
-    before { post :create, params: {question_id: question, commentable: 'Question', comment: attributes_for(:comment) }, format: :json }
+    before do
+      post :create, params: { question_id: question, commentable: 'Question', comment: attributes_for(:comment) },
+                    format: :json
+    end
 
     context 'create comment' do
       it 'saves a new Comment in the database' do
-        expect { post :create, params: {question_id: question, commentable: 'Question', comment: attributes_for(:comment) }, format: :json }.to change(Comment, :count).by(1)
+        expect do
+          post :create, params: { question_id: question, commentable: 'Question', comment: attributes_for(:comment) },
+                        format: :json
+        end.to change(Comment, :count).by(1)
       end
 
       it 'sets a flash message' do

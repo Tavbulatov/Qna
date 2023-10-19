@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class VotesController < ApplicationController
   include VotableCommentable
 
   def create
-    #в методе set_resource уставналивается переменная @resource
+    # в методе set_resource уставналивается переменная @resource
     set_resource(:votable).votes.create(params_vote)
     flash[:notice] = 'Your vote has been counted'
 

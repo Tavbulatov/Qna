@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   use_doorkeeper
-  devise_for :users, controllers: {omniauth_callbacks: 'oauth_callbacks'}
+  devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
   root to: 'questions#index'
 
@@ -16,16 +18,14 @@ Rails.application.routes.draw do
   resources :rewards, only: %i[show index]
   resources :links, only: :destroy
 
-  resources :questions, concerns: [:votable, :commentable],
+  resources :questions, concerns: %i[votable commentable],
                         defaults: { votable: 'Question', commentable: 'Question' } do
     resources :answers, shallow: true, only: %i[create update destroy],
-                        concerns: [:votable, :commentable],
+                        concerns: %i[votable commentable],
                         defaults: { votable: 'Answer', commentable: 'Answer' } do
       patch 'best', on: :member
     end
-
   end
-
 
   resources :authorizations, only: %i[new create] do
     get 'confirmation/:confirmation_token', action: 'confirmation', as: :confirmation
