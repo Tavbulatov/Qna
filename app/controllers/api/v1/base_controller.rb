@@ -1,6 +1,7 @@
 class Api::V1::BaseController < ApplicationController
   before_action :doorkeeper_authorize!
   authorize_resource except: %i[me all]
+  protect_from_forgery with: :null_session
 
   private
   def current_resource_owner
