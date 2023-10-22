@@ -47,6 +47,10 @@ gem 'active_model_serializers', '~> 0.10.2'
 gem 'doorkeeper', '~> 5.6', '>= 5.6.6'
 gem 'oj'
 
+gem 'sidekiq', '~> 4.1'
+gem 'sinatra', require: false
+gem 'whenever', require: false
+
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
   gem 'rails-controller-testing'
