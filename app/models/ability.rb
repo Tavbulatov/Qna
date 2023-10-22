@@ -28,6 +28,9 @@ class Ability
 
     can :me, User, id: user.id
     can :all, User, admin: true
+
+    can :subscribe, Subscription
+    can :unsubscribe, Subscription, subscribed_user_id: user.id
   end
 
   def guest_abilities

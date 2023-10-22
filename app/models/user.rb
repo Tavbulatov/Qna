@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :rewards
 
+  has_many :subscriptions, foreign_key: 'subscribed_user_id', dependent: :destroy
+  has_many :subscribed_questions, through: :subscriptions
+
   validates :last_name, :first_name, presence: true
 
   def admin?

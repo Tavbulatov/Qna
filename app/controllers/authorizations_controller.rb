@@ -22,7 +22,7 @@ class AuthorizationsController < ApplicationController
                                                 confirmation_token: Devise.friendly_token
                                               ))
 
-    AuthorizationsMailer.authorization_confirmation(authorization).deliver_now
+    AuthorizationsMailer.authorization_confirmation(authorization).deliver_later
 
     redirect_to root_path, notice: 'Click on the link in the email to confirm authorization'
   end

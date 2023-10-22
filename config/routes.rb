@@ -29,6 +29,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subscriptions, only: %i[] do
+    member do
+      post 'subscribe'
+      delete 'unsubscribe'
+    end
+  end
+
   resources :authorizations, only: %i[new create] do
     get 'confirmation/:confirmation_token', action: 'confirmation', as: :confirmation
   end

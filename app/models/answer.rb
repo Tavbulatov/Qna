@@ -9,4 +9,12 @@ class Answer < ApplicationRecord
   belongs_to :author, class_name: 'User'
 
   validates :body, presence: true
+
+  after_create :send_notification
+
+  private
+
+  def send_notification
+    SubscriptionToQuestionJob.new.perform(question)
+  end
 end
