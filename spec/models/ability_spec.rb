@@ -34,6 +34,9 @@ RSpec.describe Ability, type: :model do
 
     it { should be_able_to :me, user }
 
+    it { should be_able_to :subscribe, Subscription }
+    it { should be_able_to :unsubscribe, Subscription, subscribed_user_id: user.id }
+
     it 'all' do
       user.update(admin: true)
       user.reload
