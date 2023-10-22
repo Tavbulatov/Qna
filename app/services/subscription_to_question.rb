@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubscriptionToQuestion
   def send_notification(question)
     users = question.subscribed_users
