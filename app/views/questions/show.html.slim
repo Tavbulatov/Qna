@@ -2,13 +2,11 @@
   .flash_message
   h2 id="question-title" =  "Question title: #{@question.title}"
   p id="question-body"  = @question.body
-  .right-button
-    -if current_user&.subscribed_questions&.where(id: @question).present?
-      -if can? :unsubscribe, current_user
-        = link_to 'Unsubscribe', unsubscribe_subscription_path(@question), method: :delete, remote: true
-    -else
-      -if can? :subscribe, Subscription
-        = link_to 'Subcribe', subscribe_subscription_path(@question), method: :post, remote: true
+  .right-question-buttons(data-subscribed-questions=current_user&.subscribed_questions&.where(id: @question).present?.to_s)
+    -if can? :unsubscribe, current_user
+      = link_to 'Unsubscribe', unsubscribe_subscription_path(@question), class: 'unsubscribe-question-link hidden', method: :delete, remote: true
+    -if can? :subscribe, Subscription
+      = link_to 'Subcribe', subscribe_subscription_path(@question), class: 'subscribe-question-link hidden', method: :post, remote: true
 
   -unless @question.user?(current_user)
     = render 'votes/form', resource: @question

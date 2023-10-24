@@ -20,6 +20,7 @@ import 'gist'
 import 'global'
 import 'vote'
 import 'comment'
+import 'subscription'
 
 require("jquery")
 require("@nathanvda/cocoon")

@@ -1,5 +1,3 @@
-import consumer from "./channels/consumer"
-
 $(document).on('turbolinks:load', function(){
 
   if($('.question_show').length) {
