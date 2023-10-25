@@ -1,4 +1,4 @@
-require 'sphinx_helper'
+require 'rails_helper'
 
 feature 'User can search for answer', "
   In order to find needed answer

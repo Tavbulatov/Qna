@@ -38,8 +38,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
-
+  config.use_transactional_fixtures = false
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
@@ -53,7 +52,33 @@ RSpec.configure do |config|
   #     RSpec.describe UsersController, type: :controller do
   #       # ...
   #     end
-  #
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    # Ensure sphinx directories exist for the test environment
+    ThinkingSphinx::Test.init
+    # Configure and start Sphinx, and automatically stop Sphinx at the end of the test suite.
+    ThinkingSphinx::Test.start_with_autostop
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each, sphinx: true) do
+    DatabaseCleaner.strategy = :truncation
+    # Index data when running an acceptance spec.
+    ThinkingSphinx::Test.index
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!

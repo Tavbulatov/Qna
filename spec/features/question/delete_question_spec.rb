@@ -10,26 +10,25 @@ feature 'Author can delete his question', '
 ' do
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
-  given!(:question) { create(:question, author: user) }
 
   describe 'Removal of question' do
+    given!(:question) { create(:question, author: user) }
     scenario 'removal of question by its author' do
       sign_in(user)
       click_on 'Delete'
       expect(page).to have_content('Your question has been successfully deleted')
     end
 
-    scenario 'If there are no questions, then there is no "Delete" button' do
-      Question.delete_all
-      sign_in(user)
-      expect(page).to_not have_link('Delete')
-    end
-  end
 
-  describe 'Removal by non-author' do
     scenario 'attempt to delete question' do
       sign_in(other_user)
       expect(page).to_not have_link('Delete')
     end
+  end
+
+  scenario 'If there are no questions, then there is no "Delete" button' do
+    sign_in(user)
+    sleep 2
+    expect(page).to_not have_link('Delete')
   end
 end

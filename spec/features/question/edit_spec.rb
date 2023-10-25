@@ -71,7 +71,7 @@ feature 'The user can edit the question', "
   scenario 'Non-author of the question does not see the edit button', js: true do
     sign_in(other_user)
     visit question_path(question)
-
+    sleep 1
     expect(page).to_not have_link('Edit')
   end
 end

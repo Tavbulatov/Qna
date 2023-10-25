@@ -43,6 +43,7 @@ I can vote up or down.
       click_on 'Down'
       sleep 1
       click_on 'Cancel vote'
+      sleep 2
       expect(page).to have_button('Down')
       expect(page).to have_button('Up')
       expect(page).to have_content 'You deleted your vote'

@@ -31,7 +31,7 @@ feature 'I, as a user, would like to comment on the question and, as the author 
     expect(page).to_not have_content('MyComment')
   end
 
-  scenario 'when you create a comment, it appears on another user’s page', js: true do
+  scenario "when you create a comment, it appears on another user’s page", js: true do
     Capybara.using_session('user') do
       sign_in(user)
       visit question_path(question)
@@ -45,6 +45,7 @@ feature 'I, as a user, would like to comment on the question and, as the author 
 
     Capybara.using_session('guest') do
       visit question_path(question)
+
       expect(page).to have_content 'Interesting question'
     end
   end
