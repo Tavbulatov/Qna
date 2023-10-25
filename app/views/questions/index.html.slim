@@ -1,5 +1,7 @@
 h2 = 'Questions'
 
+= render 'search/form'
+
 -if can? :create, Question
   h3 = link_to 'Ask question', new_question_path
 

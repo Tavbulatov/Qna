@@ -41,4 +41,7 @@ RSpec.describe Question, type: :model do
   context 'rating' do
     it { expect(question.rating).to eq(0) }
   end
+
+  let(:resource_search) { Question }
+  it_behaves_like 'full text search'
 end

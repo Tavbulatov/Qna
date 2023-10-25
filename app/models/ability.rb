@@ -31,9 +31,12 @@ class Ability
 
     can :subscribe, Subscription
     can :unsubscribe, Subscription, subscribed_user_id: user.id
+
+    can :search, :all
   end
 
   def guest_abilities
     can :read, :all
+    can :search, :all
   end
 end

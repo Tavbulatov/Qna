@@ -1,0 +1,14 @@
+p = link_to 'Back', questions_path
+
+- @result.each do |r|
+  -if r.class == Question
+    p = r.class
+    p = link_to r.title, r
+
+  - elsif r.class == Answer
+    p = r.class
+    p = link_to r.body, r.question
+
+  - elsif r.class == Comment
+    p = r.class
+    p = link_to r.comment, r.commentable

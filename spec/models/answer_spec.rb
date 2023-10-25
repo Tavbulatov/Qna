@@ -24,4 +24,7 @@ RSpec.describe Answer, type: :model do
 
   let(:resource) { answer }
   it_behaves_like 'gists extract from links'
+
+  let(:resource_search) { Answer }
+  it_behaves_like 'full text search'
 end

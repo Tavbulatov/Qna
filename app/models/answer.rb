@@ -11,7 +11,6 @@ class Answer < ApplicationRecord
   validates :body, presence: true
 
   after_create :send_notification
-
   private
 
   def send_notification

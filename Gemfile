@@ -51,6 +51,10 @@ gem 'sidekiq', '~> 4.1'
 gem 'sinatra', require: false
 gem 'whenever', require: false
 
+gem 'mysql2',          '~> 0.5.0', :platform => :ruby
+gem 'jdbc-mysql',      '= 5.1.35',  :platform => :jruby
+gem 'thinking-sphinx', '~> 5.0'
+
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
   gem 'rails-controller-testing'
@@ -60,6 +64,7 @@ group :test do
   gem 'capybara-email'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'webdrivers'
+  gem 'database_cleaner-active_record'
 end
 
 group :development, :test do

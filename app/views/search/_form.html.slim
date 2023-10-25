@@ -1,0 +1,10 @@
+= form_with url: search_path, method: :get do |form|
+  = form.label :resource, "Search for: "
+  = form.select :resource, options_for_select([['All', 'all'],
+                                              ['Question', 'Question'],
+                                              ['Answer', 'Answer'],
+                                              ['Comment', 'Comment']])
+
+  p = form.search_field :query, size: "35", value: params[:query],
+                        placeholder: 'Find by title, body or author'
+  = form.submit 'Search'
