@@ -7,8 +7,6 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import Handlebars from 'handlebars';
-// const templates = require.context('../templates', true, /\.hbs$/);
-// templates.keys().forEach(templates);
 
 import "channels"
 
