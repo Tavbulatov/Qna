@@ -47,7 +47,7 @@ gem 'active_model_serializers', '~> 0.10.2'
 gem 'doorkeeper', '~> 5.6', '>= 5.6.6'
 gem 'oj'
 
-gem 'sidekiq', '~> 4.1'
+gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
 
@@ -77,7 +77,7 @@ group :development, :test do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
-  gem 'capistrano-sidekiq', require: false
+  gem 'capistrano-sidekiq', '~> 2.3', require: false
 end
 
 group :development do

@@ -3,7 +3,7 @@ lock "~> 3.18.0"
 
 set :application, "qna"
 set :repo_url, "git@github.com:Tavbulatov/qna.git"
-
+set :pty, false
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
