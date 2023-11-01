@@ -18,6 +18,19 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: '151.248.123.219', port: 2222 }
+  config.action_mailer.smtp_settings = {
+    tls: true,
+    address: 'smtp.yandex.ru',
+    port: 465,
+    domain: 'mail.yandex.ru',
+    user_name: Rails.application.credentials[:smtp][:user_name],
+    password: Rails.application.credentials[:smtp][:password],
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   config.require_master_key = true
