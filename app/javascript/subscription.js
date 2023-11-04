@@ -1,23 +1,24 @@
-$(document).on('turbolinks:load', function() {
-  let dataSubscribedQuestions = $('.right-question-buttons').data('subscribed-questions');
-  let unsubscribeQuestionLink = $('.unsubscribe-question-link');
-  let subscribeQuestionLink = $('.subscribe-question-link');
+document.addEventListener('DOMContentLoaded', function() {
+  let dataSubscribedQuestions = document.querySelector('.right-question-buttons').getAttribute('data-subscribed-questions');
+  let unsubscribeQuestionLink = document.querySelector('a.unsubscribe-question-link');
+  let subscribeQuestionLink = document.querySelector('.subscribe-question-link');
 
-  if (dataSubscribedQuestions) {
-    unsubscribeQuestionLink.removeClass('hidden');
+  if (dataSubscribedQuestions == 'true') {
+    unsubscribeQuestionLink.classList.remove('hidden');
   } else {
-    subscribeQuestionLink.removeClass('hidden');
+    subscribeQuestionLink.classList.remove('hidden');
   }
 
-  subscribeQuestionLink.on('click', function(e) {
-    e.preventDefault();
-    e.target.classList.add('hidden');
-    unsubscribeQuestionLink.removeClass('hidden');
+  subscribeQuestionLink.addEventListener('click', function(e) {
+    buttonBrocessing(unsubscribeQuestionLink, e);
   });
 
-  unsubscribeQuestionLink.on('click', function(e) {
-    e.preventDefault();
-    e.target.classList.add('hidden');
-    subscribeQuestionLink.removeClass('hidden');
+  unsubscribeQuestionLink.addEventListener('click', function(e) {
+    buttonBrocessing(subscribeQuestionLink, e);
   });
 });
+
+function buttonBrocessing(button, e) {
+  e.target.classList.add('hidden');
+  button.classList.remove('hidden');
+}
