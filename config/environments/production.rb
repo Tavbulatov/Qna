@@ -19,7 +19,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: '151.248.123.219', port: 2222 }
+  config.action_mailer.default_url_options = { host: '151.248.123.219' }
   config.action_mailer.smtp_settings = {
     tls: true,
     address: 'smtp.yandex.ru',
