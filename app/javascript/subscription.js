@@ -1,23 +1,21 @@
-$(document).on('turbolinks:load', function() {
-  let dataSubscribedQuestions = $('.right-question-buttons').data('subscribed-questions');
-  let unsubscribeQuestionLink = $('.unsubscribe-question-link');
-  let subscribeQuestionLink = $('.subscribe-question-link');
+document.addEventListener('DOMContentLoaded', function() {
+  let unsubscribeQuestionLink = document.querySelector('.unsubscribe-question-link');
+  let subscribeQuestionLink = document.querySelector('.subscribe-question-link');
 
-  if (dataSubscribedQuestions) {
-    unsubscribeQuestionLink.removeClass('hidden');
-  } else {
-    subscribeQuestionLink.removeClass('hidden');
+  if(subscribeQuestionLink) {
+    subscribeQuestionLink.addEventListener('click', function(e) {
+      buttonBrocessing(unsubscribeQuestionLink, e);
+    })
   }
 
-  subscribeQuestionLink.on('click', function(e) {
-    e.preventDefault();
-    e.target.classList.add('hidden');
-    unsubscribeQuestionLink.removeClass('hidden');
-  });
-
-  unsubscribeQuestionLink.on('click', function(e) {
-    e.preventDefault();
-    e.target.classList.add('hidden');
-    subscribeQuestionLink.removeClass('hidden');
-  });
+  if(unsubscribeQuestionLink) {
+    unsubscribeQuestionLink.addEventListener('click', function(e) {
+      buttonBrocessing(subscribeQuestionLink, e);
+    })
+  }
 });
+
+function buttonBrocessing(button, e) {
+  e.target.classList.add('hidden');
+  button.classList.remove('hidden');
+}
