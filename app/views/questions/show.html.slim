@@ -2,8 +2,8 @@
   .flash_message
   h2 id="question-title" =  "Question title: #{@question.title}"
   p id="question-body"  = @question.body
-  .right-question-buttons(data-subscribed-questions=current_user&.subscribed_questions&.where(id: @question).present?.to_s)
-    -if can? :unsubscribe, current_user
+  .right-question-buttons(data-subscribed-questions=Subscription.find_by(subscribed_question: @question, subscribed_user: current_user))
+    -if can? :unsubscribe, Subscription.find_by(subscribed_question: @question, subscribed_user: current_user)
       = link_to 'Unsubscribe', unsubscribe_subscription_path(@question), class: 'unsubscribe-question-link hidden', method: :delete, remote: true
     -if can? :subscribe, Subscription
       = link_to 'Subcribe', subscribe_subscription_path(@question), class: 'subscribe-question-link hidden', method: :post, remote: true
