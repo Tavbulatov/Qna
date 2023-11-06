@@ -6,10 +6,16 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
-import Handlebars from 'handlebars';
+
+import 'templates/comments'
+import 'templates/questions'
+import 'templates/links'
+import 'templates/attachments'
+import 'templates/_form_comment'
+import 'templates/answers'
+import 'templates/votes'
 
 import "channels"
-
 import '../helpers/handlebars'
 
 import 'question'

@@ -1,4 +1,6 @@
-import template  from "templates/comments.hbs"
+import Handlebars from 'handlebars';
+import 'helpers/handlebars'
+let template = commentsPartial(Handlebars)
 let event = new Event('reloadButtons')
 
 window.commentable = function commentable(){

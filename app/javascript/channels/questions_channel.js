@@ -1,5 +1,8 @@
 import consumer from "./consumer"
-import template from '../templates/questions.hbs';
+import Handlebars from 'handlebars'
+import '../helpers/handlebars'
+
+let template = questionsPartial(Handlebars)
 
 let questionsChannel
 
