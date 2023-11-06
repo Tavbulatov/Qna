@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 import template from '../templates/comments.hbs';
-
+import '../helpers/handlebars'
 function createCommentsChannel() {
     consumer.subscriptions.create("CommentsChannel", {
     connected: function() {
