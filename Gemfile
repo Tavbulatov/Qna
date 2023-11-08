@@ -54,6 +54,7 @@ gem 'whenever', require: false
 gem 'mysql2',          '~> 0.5.0', :platform => :ruby
 gem 'jdbc-mysql',      '= 5.1.35',  :platform => :jruby
 gem 'thinking-sphinx', '~> 5.0'
+gem 'unicorn'
 
 group :test do
   gem 'capybara', '~> 2.7', '>= 2.7.1'
@@ -78,6 +79,7 @@ group :development, :test do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', '~> 2.3', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :development do
