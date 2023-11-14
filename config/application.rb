@@ -46,5 +46,7 @@ module Qna
 
     config.active_record.default_timezone = 'Moscow'
     config.time_zone = 'Moscow'
+
+    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
   end
 end
